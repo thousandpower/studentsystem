@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 //Spring boot方式
 @Configuration
-@MapperScan("com.jxd.mptest.dao")
+@MapperScan("com.jxd.jqstudentgrowthtrackingsystem.dao")
 public class MybatisPlusConfig {
 
     @Bean

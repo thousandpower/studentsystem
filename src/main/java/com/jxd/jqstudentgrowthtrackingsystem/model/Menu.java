@@ -25,17 +25,8 @@ public class Menu {
      * 对应的权限
      * 0是 管理员  1是学校评价人 2是项目评价人 3是学员 4是共用的 修改密码 和退出
      */
+    @TableField("authority")
     private int authority;
-
-    public Menu() {
-    }
-
-    public Menu(int id, String title, String path, int authority) {
-        this.id = id;
-        this.title = title;
-        this.path = path;
-        this.authority = authority;
-    }
 
     public int getId() {
         return id;
@@ -66,6 +57,16 @@ public class Menu {
     }
 
     public void setAuthority(int authority) {
+        this.authority = authority;
+    }
+
+    public Menu() {
+    }
+
+    public Menu(int id, String title, String path, int authority) {
+        this.id = id;
+        this.title = title;
+        this.path = path;
         this.authority = authority;
     }
 }
