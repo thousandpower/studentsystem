@@ -1,6 +1,7 @@
 package com.jxd.jqstudentgrowthtrackingsystem.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName: StudentController
@@ -8,6 +9,6 @@ import org.springframework.stereotype.Controller;
  * @Description:
  * @Date: 2020/12/31 14:43
  */
-@Controller
+@RestController
 public class StudentController {
 }
