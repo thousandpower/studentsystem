@@ -21,7 +21,10 @@ public class Menu {
     /*菜单对应的路径*/
     private String path;
 
-    /*对应的权限*/
+    /**
+     * 对应的权限
+     * 0是 管理员  1是学校评价人 2是项目评价人 3是学员 4是共用的 修改密码 和退出
+     */
     private int authority;
 
     public Menu() {
