@@ -19,7 +19,7 @@ public class Dept {
     private String deptname;
 
     /*部门的详细描述*/
-    private String describe;
+    private String description;
 
     public int getDeptno() {
         return deptno;
@@ -37,18 +37,18 @@ public class Dept {
         this.deptname = deptname;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Dept(int deptno, String deptname, String describe) {
+    public Dept(int deptno, String deptname, String description) {
         this.deptno = deptno;
         this.deptname = deptname;
-        this.describe = describe;
+        this.description = description;
     }
 
     public Dept() {
