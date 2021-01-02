@@ -22,6 +22,10 @@ public class PublicController {
     @Autowired
     private IMenuService menuService;
 
+    /**
+     * 获取各个身份对应的导航栏菜单
+     * @return  map集合 封装的前台所需的各种数据
+     */
     @RequestMapping("/getAllMenu")
     public Map<String,Object> getAllMenu(){
         Map<String,Object> map = new HashMap<>();

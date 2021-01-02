@@ -32,8 +32,11 @@ public class Evaluator {
     /*评价人是否离职*/
     private int flag;
 
+    /*职务id*/
+    private int jobid;
 
-    public Evaluator(int evaluatorid, String username, int deptno, int age, int sex, String phone, int flag) {
+
+    public Evaluator(int evaluatorid, String username, int deptno, int age, int sex, String phone, int flag, int jobid) {
         this.evaluatorid = evaluatorid;
         this.username = username;
         this.deptno = deptno;
@@ -41,10 +44,12 @@ public class Evaluator {
         this.sex = sex;
         this.phone = phone;
         this.flag = flag;
+        this.jobid = jobid;
     }
 
     public Evaluator() {
     }
+
 
     public int getEvaluatorid() {
         return evaluatorid;
@@ -100,5 +105,13 @@ public class Evaluator {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public int getJobid() {
+        return jobid;
+    }
+
+    public void setJobid(int jobid) {
+        this.jobid = jobid;
     }
 }
