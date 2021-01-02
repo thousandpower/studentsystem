@@ -24,11 +24,11 @@ public class DeptController {
     private IDeptService deptService;
 
     @PostMapping("/getDepts")
-    public Map<String, Object> getDepts(@RequestBody Map<String, String> queryMap) {
+    public Map<String, Object> getDepts(@RequestBody Map<String, String> listQuery) {
 
-        int limit = Integer.getInteger(queryMap.get("limit")) == null ? 10 : Integer.getInteger(queryMap.get("limit"));
-        int page = Integer.getInteger(queryMap.get("page")) == null ? 1 : Integer.getInteger(queryMap.get("page"));
-        String deptname = queryMap.get("filter") == null ? "" : queryMap.get("filter");
+        int limit = Integer.valueOf(listQuery.get("limit")) == null ? 3 : Integer.valueOf(listQuery.get("limit"));
+        int page = Integer.valueOf(listQuery.get("page")) == null ? 1 : Integer.valueOf(listQuery.get("page"));
+        String deptname = listQuery.get("filter") == null ? "" : listQuery.get("filter");
         Map<String,Object> map = new HashMap<>();
         map= deptService.getDeptByPage(deptname, limit, page);
         return map;
