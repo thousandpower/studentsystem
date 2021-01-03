@@ -21,27 +21,12 @@ public class Menu {
     /*菜单对应的路径*/
     private String path;
 
-    /*对应的权限管理*/
-    @TableField("authority_management")
-    private int authorityManagement;
-
-    public Menu(int id, String title, String path, int authorityManagement) {
-        this.id = id;
-        this.title = title;
-        this.path = path;
-        this.authorityManagement = authorityManagement;
-    }
-
-    public Menu() {
-    }
-
-    public int getAuthorityManagement() {
-        return authorityManagement;
-    }
-
-    public void setAuthorityManagement(int authorityManagement) {
-        this.authorityManagement = authorityManagement;
-    }
+    /**
+     * 对应的权限
+     * 0是 管理员  1是学校评价人 2是项目评价人 3是学员 4是共用的 修改密码 和退出
+     */
+    @TableField("authority")
+    private int authority;
 
     public int getId() {
         return id;
@@ -67,5 +52,21 @@ public class Menu {
         this.path = path;
     }
 
+    public int getAuthority() {
+        return authority;
+    }
 
+    public void setAuthority(int authority) {
+        this.authority = authority;
+    }
+
+    public Menu() {
+    }
+
+    public Menu(int id, String title, String path, int authority) {
+        this.id = id;
+        this.title = title;
+        this.path = path;
+        this.authority = authority;
+    }
 }

@@ -52,6 +52,30 @@ public class Student {
     //备注
     private String remarks;
 
+    /*职业id*/
+    private int jobid;
+
+    public Student(int studentid, String studentName, int sex, String nation, String birthday, String nativePlace, int maritalStatus, String phone, String idNumber, String hiredate, String college, String major, String imagesDirectory, int deptno, int gradeid, int flag, String remarks, int jobid) {
+        this.studentid = studentid;
+        this.studentName = studentName;
+        this.sex = sex;
+        this.nation = nation;
+        this.birthday = birthday;
+        this.nativePlace = nativePlace;
+        this.maritalStatus = maritalStatus;
+        this.phone = phone;
+        this.idNumber = idNumber;
+        this.hiredate = hiredate;
+        this.college = college;
+        this.major = major;
+        this.imagesDirectory = imagesDirectory;
+        this.deptno = deptno;
+        this.gradeid = gradeid;
+        this.flag = flag;
+        this.remarks = remarks;
+        this.jobid = jobid;
+    }
+
     public int getStudentid() {
         return studentid;
     }
@@ -186,5 +210,16 @@ public class Student {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public int getJobid() {
+        return jobid;
+    }
+
+    public void setJobid(int jobid) {
+        this.jobid = jobid;
+    }
+
+    public Student() {
     }
 }
