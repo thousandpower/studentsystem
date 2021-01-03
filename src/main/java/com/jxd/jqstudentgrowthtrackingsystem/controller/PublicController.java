@@ -2,9 +2,12 @@ package com.jxd.jqstudentgrowthtrackingsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IMenuService;
+import com.jxd.jqstudentgrowthtrackingsystem.service.IUserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +24,8 @@ import java.util.Map;
 public class PublicController {
     @Autowired
     private IMenuService menuService;
+    @Autowired
+    private IUserLoginService userLoginService;
 
     /**
      * 获取各个身份对应的导航栏菜单
@@ -40,7 +45,16 @@ public class PublicController {
         map.put("status",200);
         return map;
     }
-
-
-
+    @RequestMapping("/login")
+    public Map<String,Object> login(@RequestBody UserLogin userLogin){
+        userLogin = userLoginService.selectWithLogin(userLogin.getUsername(),userLogin.getPassword());
+        Map<String,Object> map = new HashMap<>();
+        if (userLogin != null){
+            map.put("data",userLogin);
+            map.put("status",200);
+        }else {
+            map.put("status",500);
+        }
+        return map;
+    }
 }
