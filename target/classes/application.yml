@@ -12,3 +12,10 @@ mybatis-plus:
   type-aliases-package: com.jxd.jqstudentgrowthtrackingsystem.model
 server:
   port: 8087
+
+  servlet: #配置文件上传下载
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 100MB #设置单个文件上传的数据大小
+      max-request-size: 100MB #设置总上传的数据大小

@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("dept")
 public class Dept {
     /*部门编号 0：学校 1：研发部 2：*/
-    @TableId("courseid")
+    @TableId("deptno")
     private int deptno;
 
     /*部门名称*/

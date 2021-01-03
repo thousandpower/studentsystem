@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2020/12/31 14:49
  */
 @Service
-public class SchoolServiceImpl implements IStudentService {
+public class SchoolServiceImpl implements ISchoolDao{
     @Autowired
     private ISchoolDao schoolDao;
 
