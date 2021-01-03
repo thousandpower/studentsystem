@@ -29,32 +29,55 @@ public class PublicController {
 
     /**
      * 获取各个身份对应的导航栏菜单
-     * @return  map集合 封装的前台所需的各种数据
+     *
+     * @return map集合 封装的前台所需的各种数据
      */
     @RequestMapping("/getAllMenu")
-    public Map<String,Object> getAllMenu(){
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> getAllMenu() {
+        Map<String, Object> map = new HashMap<>();
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority",0);
+        wrapper.eq("authority", 0);
         wrapper.or();
-        wrapper.eq("authority",4);
+        wrapper.eq("authority", 4);
 
-        map.put("data",menuService.list(wrapper));
-        map.put("status",200);
+        map.put("data", menuService.list(wrapper));
+        map.put("status", 200);
         return map;
     }
+
+    /**
+     * 用户登录的验证
+     *
+     * @param userLogin 接收的是用户对象
+     * @return
+     */
     @RequestMapping("/login")
-    public Map<String,Object> login(@RequestBody UserLogin userLogin){
-        userLogin = userLoginService.selectWithLogin(userLogin.getUsername(),userLogin.getPassword());
-        Map<String,Object> map = new HashMap<>();
-        if (userLogin != null){
-            map.put("data",userLogin);
-            map.put("status",200);
-        }else {
-            map.put("status",500);
+    public Map<String, Object> login(@RequestBody UserLogin userLogin) {
+        userLogin = userLoginService.selectWithLogin(userLogin.getUsername(), userLogin.getPassword());
+        Map<String, Object> map = new HashMap<>();
+        if (userLogin != null) {
+            map.put("data", userLogin);
+            map.put("status", 200);
+        } else {
+            map.put("status", 500);
         }
         return map;
+    }
+
+    /**
+     * 保存前端提交的数据
+     * @param userLogin
+     * @return
+     */
+    @RequestMapping("/resetPwd")
+    public String resetPwd(@RequestBody UserLogin userLogin) {
+        boolean flag = userLoginService.updateById(userLogin);
+        if (flag) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 }
