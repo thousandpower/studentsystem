@@ -27,4 +27,9 @@ public class StudentServiceImpl extends ServiceImpl<IStudentDao, Student> implem
     public Student selectId(Student student) {
         return studentDao.selectId(student);
     }
+
+    @Override
+    public boolean removeAnyStudents(Integer[] studentids) {
+        return studentDao.deleteAnyStudents(studentids);
+    }
 }

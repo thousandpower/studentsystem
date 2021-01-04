@@ -21,4 +21,10 @@ public interface IStudentService extends IService<Student> {
      * @return
      */
     Student selectId(Student student);
+    /**
+     * 删除学员
+     * @param studentids
+     * @return
+     */
+    boolean removeAnyStudents(Integer[] studentids);
 }

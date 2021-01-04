@@ -7,21 +7,11 @@
         where student_name = #{studentName}
         and id_number = #{idNumber}
     </select>
-    <select id="selectThisStudent" resultType="java.util.HashMap">
-        select st.studentid,st.student_name,st.sex,st.nation,st.birthday,
-        st.native_place,st.marital_status,st.phone,
-        from student st
-        left join score sc on sc.studentid = st.studentid
-        left join course co on co.courseid = sc.courseid
-    </select>
-    <select id="selectAllStudent" resultType="java.util.HashMap">
-        select st.studentid,st.student_name,st.college,st.native_place,
-        sc.score,sh.appraisal_score,de.appraisal_score
-        from student st
-        left join score sc on sc.studentid = st.studentid
-        left join course co on co.courseid = sc.courseid
-        left join school_evaluation sh on sh.studentid = st.studentid
-        left join dept_evaluation de on de.studentid = st.studentid
-        order by st.studentid desc
-    </select>
+    <update id="deleteAnyStudents">
+        update student set flag = 1
+        where studentid in 
+        <foreach collection="studentid" separator="," open="(" close=")" item="studentid">
+            #{studentid}
+        </foreach>
+    </update>
 </mapper>

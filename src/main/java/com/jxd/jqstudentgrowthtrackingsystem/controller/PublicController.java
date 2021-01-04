@@ -37,12 +37,12 @@ public class PublicController {
      * @return map集合 封装的前台所需的各种数据
      */
     @RequestMapping("/getAllMenu")
-    public Map<String, Object> getAllMenu() {
+    public Map<String, Object> getAllMenu(UserLogin userLogin) {
         Map<String, Object> map = new HashMap<>();
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority", 0);
+        wrapper.eq("authority", 3);
         wrapper.or();
         wrapper.eq("authority", 4);
 
@@ -63,9 +63,9 @@ public class PublicController {
         Map<String, Object> map = new HashMap<>();
         if (userLogin != null) {
             map.put("data", userLogin);
-            map.put("status", 200);
+            map.put("status", "200");
         } else {
-            map.put("status", 500);
+            map.put("status", "500");
         }
         return map;
     }
