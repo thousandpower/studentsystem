@@ -55,7 +55,7 @@ public class PublicController {
      */
     @RequestMapping("/login")
     public Map<String, Object> login(@RequestBody UserLogin userLogin) {
-        userLogin = userLoginService.selectWithLogin(userLogin.getUsername(), userLogin.getPassword());
+        userLogin = userLoginService.selectWithLogin(userLogin.getUserid(), userLogin.getPassword());
         Map<String, Object> map = new HashMap<>();
         if (userLogin != null) {
             map.put("data", userLogin);
@@ -67,12 +67,15 @@ public class PublicController {
     }
 
     /**
-     * 保存前端提交的数据
+     * 修改或重置密码
      * @param userLogin 用户对象
      * @return
      */
-    @RequestMapping("/resetPwd")
-    public String resetPwd(@RequestBody UserLogin userLogin) {
+    @RequestMapping("/editPwd")
+    public String editPwd(@RequestBody UserLogin userLogin) {
+        if (userLogin.getPassword().length() == 0){
+            userLogin.setPassword("a123456");
+        }
         boolean flag = userLoginService.updateById(userLogin);
         if (flag) {
             return "success";

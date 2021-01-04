@@ -20,5 +20,11 @@ import java.util.Map;
  */
 @Service
 public class StudentServiceImpl extends ServiceImpl<IStudentDao, Student> implements IStudentService {
+    @Autowired
+    private IStudentDao studentDao;
 
+    @Override
+    public Student selectId(Student student) {
+        return studentDao.selectId(student);
+    }
 }

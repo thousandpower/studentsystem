@@ -5,4 +5,9 @@
     <select id="selectAllstudents" resultType="java.util.HashMap">
 
     </select>
+    <select id="selectId" resultType="Student">
+        select studentid from student
+        where student_name = #{studentName}
+        and id_number = #{idNumber}
+    </select>
 </mapper>

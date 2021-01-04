@@ -15,4 +15,10 @@ import java.util.Map;
  * @Date: 2020/12/31 14:48
  */
 public interface IStudentService extends IService<Student> {
+    /**
+     * 查询学生id
+     * @param student 学员对象
+     * @return
+     */
+    Student selectId(Student student);
 }

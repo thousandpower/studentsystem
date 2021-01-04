@@ -20,7 +20,7 @@ public class UserLoginServiceImpl extends ServiceImpl<IUserLoginDao, UserLogin> 
     private IUserLoginDao userLoginDao;
 
     @Override
-    public UserLogin selectWithLogin(String username, String password) {
-        return userLoginDao.selectWithLogin(username, password);
+    public UserLogin selectWithLogin(int userid, String password) {
+        return userLoginDao.selectWithLogin(userid, password);
     }
 }
