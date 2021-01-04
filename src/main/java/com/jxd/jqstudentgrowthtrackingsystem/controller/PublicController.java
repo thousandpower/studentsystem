@@ -68,7 +68,7 @@ public class PublicController {
 
     /**
      * 保存前端提交的数据
-     * @param userLogin
+     * @param userLogin 用户对象
      * @return
      */
     @RequestMapping("/resetPwd")
