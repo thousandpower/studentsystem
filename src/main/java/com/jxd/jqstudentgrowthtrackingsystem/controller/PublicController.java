@@ -2,17 +2,21 @@ package com.jxd.jqstudentgrowthtrackingsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jxd.jqstudentgrowthtrackingsystem.config.UploadPhotoConfig;
 import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IMenuService;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IUserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @ClassName: PublicController
@@ -97,5 +101,30 @@ public class PublicController {
         } else {
             return "fail";
         }
+    }
+
+    /**
+     * 头像上传
+     * @param file 头像文件
+     * @return
+     */
+    @RequestMapping("/upload")
+    public String upload(MultipartFile file) throws IOException {
+        //处理文件名 添加UUID 保证每个文件名全局唯一
+        //获取原文件名
+        String fileName = file.getOriginalFilename();
+        //获取UUID 全局唯一的 32位字符串 包含数字字母和-
+        String uuid = UUID.randomUUID().toString();
+        String new_fileName = uuid + "_" + fileName;
+        //将文件存到服务器上
+        String path = UploadPhotoConfig.getPath();
+        File file_final = new File(path,new_fileName);
+        //判断文件所在文件夹是否存在
+        if (!file_final.getParentFile().exists()){
+            file_final.getParentFile().mkdir();
+        }
+        file.transferTo(file_final);
+        String photoPath = path+"\\"+new_fileName;
+        return photoPath;
     }
 }
