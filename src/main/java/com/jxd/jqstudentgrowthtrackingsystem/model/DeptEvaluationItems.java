@@ -31,6 +31,8 @@ public class DeptEvaluationItems {
 
     /*性格*/
     private int character;
+    /*评价时间标识*/
+    private int date;
 
     public int getStudentid() {
         return studentid;
@@ -80,13 +82,22 @@ public class DeptEvaluationItems {
         this.character = character;
     }
 
-    public DeptEvaluationItems(int studentid, int ability, int initiative, int communication, int moralQuality, int character) {
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public DeptEvaluationItems(int studentid, int ability, int initiative, int communication, int moralQuality, int character, int date) {
         this.studentid = studentid;
         this.ability = ability;
         this.initiative = initiative;
         this.communication = communication;
         this.moralQuality = moralQuality;
         this.character = character;
+        this.date = date;
     }
 
     public DeptEvaluationItems() {

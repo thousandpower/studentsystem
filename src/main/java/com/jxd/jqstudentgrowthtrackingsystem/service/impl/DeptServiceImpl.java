@@ -29,7 +29,6 @@ public class DeptServiceImpl extends ServiceImpl<IDeptDao, Dept> implements IDep
         //构造分页对象
         Page<Map<String, Object>> pages = new Page<>(page, limit);
         Map<String, Object> map = new HashMap<>();
-
         //调用dao层获取数据
         IPage<Map<String, Object>> result = deptDao.getDeptByPage(pages, deptname);
         //查询出的员工信息 （分页）

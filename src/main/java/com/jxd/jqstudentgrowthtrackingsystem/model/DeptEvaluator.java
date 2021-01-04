@@ -1,5 +1,6 @@
 package com.jxd.jqstudentgrowthtrackingsystem.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -8,9 +9,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @Description:
  * @Date: 2020/12/31
  */
-@TableName("evaluator")
-public class Evaluator {
-    @TableId("evaluatorid")
+@TableName("dept_evaluator")
+public class DeptEvaluator {
+    @TableId(value = "evaluatorid",type = IdType.AUTO)
     /*评价人id*/
     private int evaluatorid;
 
@@ -36,7 +37,7 @@ public class Evaluator {
     private int jobid;
 
 
-    public Evaluator(int evaluatorid, String username, int deptno, int age, int sex, String phone, int flag, int jobid) {
+    public DeptEvaluator(int evaluatorid, String username, int deptno, int age, int sex, String phone, int flag, int jobid) {
         this.evaluatorid = evaluatorid;
         this.username = username;
         this.deptno = deptno;
@@ -47,7 +48,7 @@ public class Evaluator {
         this.jobid = jobid;
     }
 
-    public Evaluator() {
+    public DeptEvaluator() {
     }
 
 

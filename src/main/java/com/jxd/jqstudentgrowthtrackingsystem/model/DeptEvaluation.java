@@ -30,6 +30,9 @@ public class DeptEvaluation {
     @TableField("appraisal_content")
     private String appraisalContent;
 
+    /*评价时间标识*/
+    private int date;
+
     public int getStudentid() {
         return studentid;
     }
@@ -71,12 +74,21 @@ public class DeptEvaluation {
     }
 
 
-    public DeptEvaluation(int studentid, int gradeid, int evaluatorid, int appraisalScore, String appraisalContent) {
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public DeptEvaluation(int studentid, int gradeid, int evaluatorid, int appraisalScore, String appraisalContent, int date) {
         this.studentid = studentid;
         this.gradeid = gradeid;
         this.evaluatorid = evaluatorid;
         this.appraisalScore = appraisalScore;
         this.appraisalContent = appraisalContent;
+        this.date = date;
     }
 
     public DeptEvaluation() {
