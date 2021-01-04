@@ -67,12 +67,27 @@ public class PublicController {
     }
 
     /**
+     * 查询用户信息
+     * @param id 用户id
+     * @return
+     */
+    @RequestMapping("/getThisUser")
+    public Map<String, Object> getThisUser(Integer id){
+        UserLogin userLogin = userLoginService.getById(id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("data",userLogin);
+        map.put("status", 200);
+        return map;
+    }
+
+    /**
      * 修改或重置密码
      * @param userLogin 用户对象
      * @return
      */
     @RequestMapping("/editPwd")
     public String editPwd(@RequestBody UserLogin userLogin) {
+        //对前端传递过来的数据中是否含有密码进行判断
         if (userLogin.getPassword().length() == 0){
             userLogin.setPassword("a123456");
         }
