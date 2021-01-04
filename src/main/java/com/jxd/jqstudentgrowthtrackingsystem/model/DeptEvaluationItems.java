@@ -31,6 +31,17 @@ public class DeptEvaluationItems {
 
     /*性格*/
     private int character;
+    /*工作年份*/
+    @TableField("work_year")
+    private int workYear;
+
+    public int getWorkYear() {
+        return workYear;
+    }
+
+    public void setWorkYear(int workYear) {
+        this.workYear = workYear;
+    }
 
     public int getStudentid() {
         return studentid;

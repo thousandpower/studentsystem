@@ -19,5 +19,8 @@ import java.util.Map;
 public class StudentController {
     @Autowired
     private IStudentService studentService;
-
+    @RequestMapping("/getMyInform")
+    public Map<String,Object> getMyInform(Integer userid){
+        return null;
+    }
 }

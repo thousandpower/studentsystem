@@ -3,6 +3,7 @@ package com.jxd.jqstudentgrowthtrackingsystem.model;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName: DeptEvaluation
@@ -29,6 +30,17 @@ public class DeptEvaluation {
     /*评价内容*/
     @TableField("appraisal_content")
     private String appraisalContent;
+    /*工作年份*/
+    @TableField("work_year")
+    private int workYear;
+
+    public int getWorkYear() {
+        return workYear;
+    }
+
+    public void setWorkYear(int workYear) {
+        this.workYear = workYear;
+    }
 
     public int getStudentid() {
         return studentid;

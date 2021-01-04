@@ -16,17 +16,26 @@ import java.util.Map;
  */
 public interface IStudentDao extends BaseMapper<Student> {
     /**
-     * 查询全部学员
-     * @param page 分页对象
-     * @param studentName 模糊查询
-     * @return
-     */
-    IPage<Map<String, Object>> selectAllstudents(Page<Map<String,Object>> page,
-                                                 @Param("studentName") String studentName);
-    /**
      * 查询学生id
      * @param student 学员对象
      * @return
      */
     Student selectId(Student student);
+
+    /**
+     * 查看该学员的全部信息
+     * @param studentid 学员id
+     * @return
+     */
+    Map<String,Object> selectThisStudent(Integer studentid);
+
+    /**
+     * 查询全部学员
+     * @param page 分页对象
+     * @param studentName 学员姓名
+     * @return
+     */
+    Map<String,Object> selectAllStudent(Page<Map<String,Object>> page,
+                                        @Param("studentName") String studentName,
+                                        @Param("gradeid") int gradeid);
 }
