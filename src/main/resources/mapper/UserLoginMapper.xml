@@ -32,4 +32,9 @@
         </where>
         order by role desc
     </select>
+    <select id="getMyPassword" resultType="UserLogin">
+        select userid,username,password,role
+        from userlogin
+        where userid = #{userid}
+    </select>
 </mapper>

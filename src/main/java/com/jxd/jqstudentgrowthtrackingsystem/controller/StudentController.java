@@ -60,7 +60,7 @@ public class StudentController {
      * @return
      */
     @RequestMapping("/editMyInform")
-    public String editMyInform(Student student) {
+    public String editMyInform(@RequestBody Student student) {
         boolean flag = studentService.updateById(student);
         if (flag) {
             return "success";

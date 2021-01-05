@@ -43,7 +43,7 @@ public class PublicController {
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority", 0);
+        wrapper.eq("authority", 3);
         wrapper.or();
         wrapper.eq("authority", 4);
 
@@ -133,5 +133,11 @@ public class PublicController {
         file.transferTo(file_final);
         String photoPath = path+"\\"+new_fileName;
         return photoPath;
+    }
+    @RequestMapping("/getMyPassword/{userid}")
+    public Map<String,Object> getMyPassword(@PathVariable Integer userid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("data",userLoginService.getMyPassword(userid).getPassword());
+        return map;
     }
 }

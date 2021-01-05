@@ -37,6 +37,12 @@ public interface IUserLoginDao extends BaseMapper<UserLogin> {
      * @return
      */
     boolean resetThisUserPwd(Integer userid);
+    /**
+     * 查询用户的密码
+     * @param userid
+     * @return
+     */
+    UserLogin getMyPassword(@Param("userid") Integer userid);
 
     /**
      * 查询全部用户

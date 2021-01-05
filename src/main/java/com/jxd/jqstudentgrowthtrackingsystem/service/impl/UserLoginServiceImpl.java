@@ -57,4 +57,9 @@ public class UserLoginServiceImpl extends ServiceImpl<IUserLoginDao, UserLogin> 
         map.put("pageCount",result.getPages());
         return map;
     }
+
+    @Override
+    public UserLogin getMyPassword(Integer userid) {
+        return userLoginDao.getMyPassword(userid);
+    }
 }

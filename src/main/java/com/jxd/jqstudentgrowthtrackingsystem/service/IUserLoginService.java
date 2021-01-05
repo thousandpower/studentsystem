@@ -41,4 +41,11 @@ public interface IUserLoginService extends IService<UserLogin> {
      * @return
      */
     Map<String, Object> getAllUser(int limit, int page, String ename);
+
+    /**
+     * 查询用户的密码
+     * @param userid
+     * @return
+     */
+    UserLogin getMyPassword(Integer userid);
 }
