@@ -93,52 +93,6 @@ public class ManagerController {
     }
 
     /**
-     * 查询所有学生
-     *
-     * @param student
-     * @return
-     */
-    @RequestMapping("/getAllStudents")
-    public Map<String, Object> getAllStudents(Student student) {
-        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-        studentQueryWrapper.orderByDesc("gradeid");
-        if (student != null) {
-            studentQueryWrapper.like("student_name", student.getStudentName());
-            studentQueryWrapper.eq("gradeid", student.getGradeid());
-        }
-        List<Student> studentList = studentService.list(studentQueryWrapper);
-        Map<String, Object> map = new HashMap<>();
-        map.put("data", studentList);
-        return map;
-    }
-
-    /**
-     * 查询所有班期
-     *
-     * @return
-     */
-    @RequestMapping("/getAllGrade")
-    public Map<String, Object> getAllGrade() {
-        List<Grade> gradeList = gradeService.list();
-        Map<String, Object> map = new HashMap<>();
-        map.put("data", gradeList);
-        return map;
-    }
-
-    /**
-     * 查询所有课程
-     *
-     * @return
-     */
-    @RequestMapping("/getAllCourse")
-    public Map<String, Object> getAllCourse() {
-        List<Course> courseList = courseService.list();
-        Map<String, Object> map = new HashMap<>();
-        map.put("data", courseList);
-        return map;
-    }
-
-    /**
      * 获取全部用户
      * @param queryMap
      * @return

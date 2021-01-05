@@ -134,6 +134,12 @@ public class PublicController {
         String photoPath = path+"\\"+new_fileName;
         return photoPath;
     }
+
+    /**
+     * 查询用户的密码
+     * @param userid
+     * @return
+     */
     @RequestMapping("/getMyPassword/{userid}")
     public Map<String,Object> getMyPassword(@PathVariable Integer userid){
         Map<String,Object> map = new HashMap<>();
