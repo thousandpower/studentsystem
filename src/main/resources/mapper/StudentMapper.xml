@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IStudentDao">
+    <select id="selectId" resultType="Student">
+        select studentid from student
+        where student_name = #{studentName}
+        and id_number = #{idNumber}
+    </select>
+    <update id="deleteAnyStudents">
+        update student set flag = 1
+        where studentid in 
+        <foreach collection="studentid" separator="," open="(" close=")" item="studentid">
+            #{studentid}
+        </foreach>
+    </update>
+</mapper>

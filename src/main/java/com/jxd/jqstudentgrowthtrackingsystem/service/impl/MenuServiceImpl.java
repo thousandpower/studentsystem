@@ -17,6 +17,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class MenuServiceImpl extends ServiceImpl<IMenuDao, Menu> implements IMenuService {
 
-
-
 }
