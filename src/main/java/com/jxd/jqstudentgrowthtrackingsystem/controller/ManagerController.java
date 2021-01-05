@@ -102,9 +102,9 @@ public class ManagerController {
     public Map<String, Object> getAllStudents(Student student) {
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.orderByDesc("gradeid");
-        if (student != null){
-            studentQueryWrapper.like("student_name",student.getStudentName());
-            studentQueryWrapper.eq("gradeid",student.getGradeid());
+        if (student != null) {
+            studentQueryWrapper.like("student_name", student.getStudentName());
+            studentQueryWrapper.eq("gradeid", student.getGradeid());
         }
         List<Student> studentList = studentService.list(studentQueryWrapper);
         Map<String, Object> map = new HashMap<>();
@@ -114,6 +114,7 @@ public class ManagerController {
 
     /**
      * 查询所有班期
+     *
      * @return
      */
     @RequestMapping("/getAllGrade")
@@ -126,13 +127,28 @@ public class ManagerController {
 
     /**
      * 查询所有课程
+     *
      * @return
      */
     @RequestMapping("/getAllCourse")
-    public Map<String,Object> getAllCourse(){
+    public Map<String, Object> getAllCourse() {
         List<Course> courseList = courseService.list();
         Map<String, Object> map = new HashMap<>();
         map.put("data", courseList);
         return map;
+    }
+
+    /**
+     * 获取全部用户
+     * @param queryMap
+     * @return
+     */
+    @RequestMapping("/getAllUser")
+    public Map<String, Object> getAllUser(@RequestBody Map<String, String> queryMap) {
+        //获取每个查询参数
+        int limit = Integer.parseInt(queryMap.get("limit"));
+        int page = Integer.parseInt(queryMap.get("page"));
+        String username = queryMap.get("filter");
+        return userLoginService.getAllUser(limit,page,username);
     }
 }

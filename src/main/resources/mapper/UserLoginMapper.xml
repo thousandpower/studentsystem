@@ -7,4 +7,29 @@
         from userlogin
         where userid = #{userid} and password = #{password}
     </select>
+    <select id="selectThisUser" resultType="UserLogin">
+        select userid,username,password,role
+        from userlogin
+        where userid = #{userid}
+    </select>
+    <update id="updateThisUserPwd" parameterType="UserLogin">
+        update userlogin
+        set password = #{password}
+        where userid = #{userid}
+    </update>
+    <update id="resetThisUserPwd" parameterType="UserLogin">
+        update userlogin
+        set password = 'a123456'
+        where userid = #{userid}
+    </update>
+    <select id="selectAllUser" resultType="java.util.HashMap">
+        select userid,username,password,role
+        from userlogin
+        <where>
+            <if test="username != null and username !=''">
+                username like concat('%',#{username},'%')
+            </if>
+        </where>
+        order by role desc
+    </select>
 </mapper>

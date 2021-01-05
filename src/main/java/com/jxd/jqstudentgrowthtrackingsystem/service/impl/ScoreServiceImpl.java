@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jxd.jqstudentgrowthtrackingsystem.dao.IScoreDao;
 import com.jxd.jqstudentgrowthtrackingsystem.model.Score;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IScoreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @ClassName ScoreServiceImpl

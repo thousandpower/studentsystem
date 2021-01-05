@@ -7,6 +7,7 @@ import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IMenuService;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IUserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +43,7 @@ public class PublicController {
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority", 3);
+        wrapper.eq("authority", 0);
         wrapper.or();
         wrapper.eq("authority", 4);
 
@@ -75,9 +76,9 @@ public class PublicController {
      * @param id 用户id
      * @return
      */
-    @RequestMapping("/getThisUser")
-    public Map<String, Object> getThisUser(Integer id){
-        UserLogin userLogin = userLoginService.getById(id);
+    @RequestMapping("/getThisUser/{id}")
+    public Map<String, Object> getThisUser(@PathVariable Integer id){
+        UserLogin userLogin = userLoginService.selectThisUser(id);
         Map<String, Object> map = new HashMap<>();
         map.put("data",userLogin);
         map.put("status", 200);
@@ -85,18 +86,24 @@ public class PublicController {
     }
 
     /**
-     * 修改或重置密码
+     * 修改密码
      * @param userLogin 用户对象
      * @return
      */
-    @RequestMapping("/editPwd")
+    @RequestMapping("/editMyPwd")
     public String editPwd(@RequestBody UserLogin userLogin) {
-        //对前端传递过来的数据中是否含有密码进行判断
-        if (userLogin.getPassword().length() == 0){
-            userLogin.setPassword("a123456");
+
+        boolean editUserFlag = userLoginService.updateThisUserPwd(userLogin);
+        if (editUserFlag) {
+            return "success";
+        } else {
+            return "fail";
         }
-        boolean flag = userLoginService.updateById(userLogin);
-        if (flag) {
+    }
+    @RequestMapping("/resetMyPwd/{userid}")
+    public String resetPwd(@PathVariable Integer userid) {
+        boolean resetUserFlag = userLoginService.resetThisUserPwd(userid);
+        if (resetUserFlag) {
             return "success";
         } else {
             return "fail";

@@ -27,4 +27,5 @@ public interface IStudentService extends IService<Student> {
      * @return
      */
     boolean removeAnyStudents(Integer[] studentids);
+
 }
