@@ -29,4 +29,13 @@ public interface IStudentDao extends BaseMapper<Student> {
      * @return
      */
     boolean deleteAnyStudents(Integer[] studentids);
+
+    /**
+     * 获取全部学生信息
+     * @param page 分页对象
+     * @param studentName 学员姓名
+     * @return
+     */
+    Map<String,Object> selectAllStudent(Page<Map<String,Object>> page,
+                                        @Param("studentName") String studentName);
 }

@@ -29,10 +29,6 @@ public class ManagerController {
     private IUserLoginService userLoginService;
     @Autowired
     private IGradeService gradeService;
-    @Autowired
-    private ICourseService courseService;
-    @Autowired
-    private IScoreService scoreService;
 
     /**
      * 新增学员及学员用户
@@ -94,6 +90,7 @@ public class ManagerController {
 
     /**
      * 获取全部用户
+     *
      * @param queryMap
      * @return
      */
@@ -103,6 +100,14 @@ public class ManagerController {
         int limit = Integer.parseInt(queryMap.get("limit"));
         int page = Integer.parseInt(queryMap.get("page"));
         String username = queryMap.get("filter");
-        return userLoginService.getAllUser(limit,page,username);
+        return userLoginService.getAllUser(limit, page, username);
+    }
+    @RequestMapping("/getAllStudent")
+    public Map<String, Object> getAllStudent(@RequestBody Map<String, String> queryMap) {
+        //获取每个查询参数
+        int limit = Integer.parseInt(queryMap.get("limit"));
+        int page = Integer.parseInt(queryMap.get("page"));
+        String studentName = queryMap.get("filter");
+        return null;
     }
 }

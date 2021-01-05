@@ -1,19 +1,14 @@
 package com.jxd.jqstudentgrowthtrackingsystem.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jxd.jqstudentgrowthtrackingsystem.model.Course;
-import com.jxd.jqstudentgrowthtrackingsystem.model.SchoolEvaluation;
 import com.jxd.jqstudentgrowthtrackingsystem.model.Student;
 import com.jxd.jqstudentgrowthtrackingsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,15 +22,11 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
     @Autowired
-    private ICourseService courseService;
-    @Autowired
     private IDeptEvaluationService deptEvaluationService;
     @Autowired
     private IDeptEvaluationItemService deptEvaluationItemService;
     @Autowired
     private ISchoolService schoolService;
-    @Autowired
-    private IScoreService scoreService;
     @Autowired
     private IEvaluatorService evaluatorService;
 
