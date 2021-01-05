@@ -63,7 +63,6 @@ public class ManagerController {
         return deptService.list();
     }
 
-
     /**
      * 管理员部分的部门维护的 分页模糊查询的部门展示
      *
@@ -154,35 +153,6 @@ public class ManagerController {
             return "fail";
         }
     }
-
-
-/*    *//**
-     * 批量删除部门评价人
-     *
-     * @param arrEvaluatorids 需要批量删除的评价人
-     * @return 是否成功的字符串标记
-     *//*
-    @PostMapping("/delBatchDeptEvaluator")
-    public String delBatchDeptEvaluator(@RequestBody String[] arrEvaluatorids) {
-        List<String> evaluatorids = Arrays.asList(arrEvaluatorids);
-
-        AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.in("evaluatorid", evaluatorids);
-        int studentCountInDeptnos = studentService.count(wrapper);
-
-        int evaluatorCountInDeptnos = deptEvaluatorService.count(wrapper);
-        int count = studentCountInDeptnos + evaluatorCountInDeptnos;
-        boolean isDel = false;
-        if (count == 0) {
-            isDel = d.removeByIds(deptnos);
-        }
-        if (isDel) {
-            return "success";
-        } else {
-            return "fail";
-        }
-    }*/
-
 
 
 
