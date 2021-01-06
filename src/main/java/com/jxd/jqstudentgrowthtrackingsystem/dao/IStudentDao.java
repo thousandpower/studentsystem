@@ -29,4 +29,7 @@ public interface IStudentDao extends BaseMapper<Student> {
      * @return
      */
     boolean deleteAnyStudents(Integer[] studentids);
+
+
+    IPage<Map<String,Object>> getStudentByPageAndDeptno(Page<Map<String,Object>> pages,  @Param("studentName")String studentname, @Param("deptno")int deptno);
 }

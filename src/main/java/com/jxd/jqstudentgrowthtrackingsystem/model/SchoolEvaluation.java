@@ -27,18 +27,7 @@ public class SchoolEvaluation {
 
     @TableField("appraisal_content")
     /*综合的评价内容*/
-    private int appraisalContent;
-
-    public SchoolEvaluation(int studentid, int evaluatorid, int gradeid, int appraisalScore, int appraisalContent) {
-        this.studentid = studentid;
-        this.evaluatorid = evaluatorid;
-        this.gradeid = gradeid;
-        this.appraisalScore = appraisalScore;
-        this.appraisalContent = appraisalContent;
-    }
-
-    public SchoolEvaluation() {
-    }
+    private String appraisalContent;
 
     public int getStudentid() {
         return studentid;
@@ -72,11 +61,22 @@ public class SchoolEvaluation {
         this.appraisalScore = appraisalScore;
     }
 
-    public int getAppraisalContent() {
+    public String getAppraisalContent() {
         return appraisalContent;
     }
 
-    public void setAppraisalContent(int appraisalContent) {
+    public void setAppraisalContent(String appraisalContent) {
         this.appraisalContent = appraisalContent;
+    }
+
+    public SchoolEvaluation(int studentid, int evaluatorid, int gradeid, int appraisalScore, String appraisalContent) {
+        this.studentid = studentid;
+        this.evaluatorid = evaluatorid;
+        this.gradeid = gradeid;
+        this.appraisalScore = appraisalScore;
+        this.appraisalContent = appraisalContent;
+    }
+
+    public SchoolEvaluation() {
     }
 }

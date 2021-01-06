@@ -32,4 +32,26 @@ public class StudentServiceImpl extends ServiceImpl<IStudentDao, Student> implem
     public boolean removeAnyStudents(Integer[] studentids) {
         return studentDao.deleteAnyStudents(studentids);
     }
+
+
+    @Override
+    public  Map<String, Object> getStudentByPageAndDeptno(String studentname, int deptno,int limit, int page){
+        //构造分页对象
+        Page<Map<String, Object>> pages = new Page<>(page, limit);
+        Map<String, Object> map = new HashMap<>();
+        //调用dao层获取数据
+        IPage<Map<String, Object>> result =studentDao.getStudentByPageAndDeptno(pages, studentname,deptno);
+        //查询出的员工信息 （分页）
+        map.put("students",result.getRecords());
+        //总条数
+        map.put("total",result.getTotal());
+        //总页数
+        map.put("pageCount",result.getPages());
+
+        return map;
+
+
+    }
+
+
 }

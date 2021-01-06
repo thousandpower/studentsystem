@@ -27,4 +27,8 @@ public interface IStudentService extends IService<Student> {
      * @return
      */
     boolean removeAnyStudents(Integer[] studentids);
+
+    Map<String, Object> getStudentByPageAndDeptno(String studentname, int deptno,int limit, int page);
+
+
 }
