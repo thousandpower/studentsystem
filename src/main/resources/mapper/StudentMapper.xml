@@ -14,4 +14,36 @@
             #{studentid}
         </foreach>
     </update>
+    <select id="selectThisStudentSchoolEvaluation" resultType="java.util.HashMap">
+        select st.studentid,st.student_name,co.html,co.oracle,
+        co.js,co.java_base,co.java_high,co.l1,ev.evaluatorid,
+        ev.username,sc.appraisal_score,sc.gradeid,sc.appraisal_content
+        from student st
+        left join course_score co on co.studentid = st.studentid
+        left join school_evaluation sc on sc.studentid = st.studentid
+        left join evaluator ev on ev.evaluatorid = sc.evaluatorid
+        where st.studentid = #{studentid}
+    </select>
+    <select id="selectThisStudentDeptEvaluation" resultType="java.util.HashMap">
+        select st.studentid,st.student_name,ev.evaluatorid,ev.username,
+        de.appraisal_score,de.appraisal_content,dei.ability,dei.initiative,
+        dei.communication,dei.moral_quality,dei.character
+        from student st
+        left join dept_evaluation de on de.studentid = st.studentid
+        left join dept_evaluation_items dei on dei.studentid = st.studentid
+        left join evaluator ev on ev.evaluatorid = de.evaluatorid
+        where st.studentid = #{studentid}
+        and de.work_year = #{workYear}
+    </select>
+    <select id="selectAllStudent" resultType="java.util.HashMap">
+        select studentid,student_name,sex,nation,birthday,native_place,
+        marital_status,phone,id_number,college,major
+        from student
+        <where>
+            <if test="studentName != null and studentName !=''">
+                student_name like concat('%',#{studentName},'%')
+            </if>
+        </where>
+        order by gradeid desc
+    </select>
 </mapper>

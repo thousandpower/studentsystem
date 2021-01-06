@@ -2,7 +2,6 @@ package com.jxd.jqstudentgrowthtrackingsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jxd.jqstudentgrowthtrackingsystem.config.UploadPhotoConfig;
 import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IMenuService;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IUserLoginService;
@@ -43,7 +42,7 @@ public class PublicController {
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority", 3);
+        wrapper.eq("authority", 0);
         wrapper.or();
         wrapper.eq("authority", 4);
 
@@ -109,32 +108,6 @@ public class PublicController {
             return "fail";
         }
     }
-
-    /**
-     * 头像上传
-     * @param file 头像文件
-     * @return
-     */
-    @RequestMapping("/upload")
-    public String upload(MultipartFile file) throws IOException {
-        //处理文件名 添加UUID 保证每个文件名全局唯一
-        //获取原文件名
-        String fileName = file.getOriginalFilename();
-        //获取UUID 全局唯一的 32位字符串 包含数字字母和-
-        String uuid = UUID.randomUUID().toString();
-        String new_fileName = uuid + "_" + fileName;
-        //将文件存到服务器上
-        String path = UploadPhotoConfig.getPath();
-        File file_final = new File(path,new_fileName);
-        //判断文件所在文件夹是否存在
-        if (!file_final.getParentFile().exists()){
-            file_final.getParentFile().mkdir();
-        }
-        file.transferTo(file_final);
-        String photoPath = path+"\\"+new_fileName;
-        return photoPath;
-    }
-
     /**
      * 查询用户的密码
      * @param userid

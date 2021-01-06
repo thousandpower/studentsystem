@@ -108,6 +108,6 @@ public class ManagerController {
         int limit = Integer.parseInt(queryMap.get("limit"));
         int page = Integer.parseInt(queryMap.get("page"));
         String studentName = queryMap.get("filter");
-        return null;
+        return studentService.getAllstudent(limit,page,studentName);
     }
 }

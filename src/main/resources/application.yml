@@ -17,5 +17,3 @@ mybatis-plus:
   type-aliases-package: com.jxd.jqstudentgrowthtrackingsystem.model
 server:
   port: 8087
-upload:
-    path: D:\综合项目\photo

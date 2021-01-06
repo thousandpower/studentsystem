@@ -61,30 +61,29 @@ public class StudentController {
     }
 
     /**
-     * 查询学员的班期
+     * 获取培训学校评价
      *
      * @param userid
      * @return
      */
-    @RequestMapping("/getMyGrade/{userid}")
-    public Map<String, Object> getMyGrade(@PathVariable Integer userid) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("gradeid", studentService.getById(userid).getGradeid());
-        return map;
-    }
-
     @RequestMapping("/getMySchoolEvaluation/{userid}")
     public Map<String, Object> getMySchoolEvaluation(@PathVariable Integer userid) {
         Map<String, Object> map = new HashMap<>();
-        //班期
-        map.put("gradeid", studentService.getById(userid).getGradeid());
-        //评价人
-        map.put("username", evaluatorService.getById(schoolService.getById(userid).getEvaluatorid()).getUsername());
-        //综合评分
-        map.put("appraisalScore", schoolService.getById(userid).getAppraisalScore());
-        //评价
-        map.put("appraisalContent", schoolService.getById(userid).getAppraisalContent());
+        map.put("data", studentService.selectThisStudentSchoolEvaluation(userid));
+        return map;
+    }
 
+    /**
+     * 获取部门评价
+     *
+     * @param userid
+     * @param workYear
+     * @return
+     */
+    @RequestMapping("/getMyDeptEvaluation/{userid}/{workYear}")
+    public Map<String, Object> getMyDeptEvaluation(@PathVariable Integer userid, @PathVariable Integer workYear) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", studentService.selectThisStudentDeptEvaluation(userid, workYear));
         return map;
     }
 }

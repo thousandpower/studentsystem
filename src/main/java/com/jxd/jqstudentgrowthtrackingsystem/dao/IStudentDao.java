@@ -29,13 +29,28 @@ public interface IStudentDao extends BaseMapper<Student> {
      * @return
      */
     boolean deleteAnyStudents(Integer[] studentids);
-
     /**
-     * 获取全部学生信息
-     * @param page 分页对象
-     * @param studentName 学员姓名
+     * 查询全部用户
+     * @param page
+     * @param studentName
      * @return
      */
-    Map<String,Object> selectAllStudent(Page<Map<String,Object>> page,
-                                        @Param("studentName") String studentName);
+    IPage<Map<String, Object>> selectAllStudent(Page<Map<String,Object>> page,
+                                             @Param("studentName") String studentName);
+
+    /**
+     * 学员培训学校评价
+     * @param studentid
+     * @return
+     */
+    Map<String,Object> selectThisStudentSchoolEvaluation(@Param("studentid") Integer studentid);
+
+    /**
+     * 学员转正及工作1-3年的评价
+     * @param studentid
+     * @param workYear
+     * @return
+     */
+    Map<String,Object> selectThisStudentDeptEvaluation(@Param("studentid") Integer studentid,
+                                                       @Param("workYear") int workYear);
 }
