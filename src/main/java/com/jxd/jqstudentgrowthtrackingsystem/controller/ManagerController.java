@@ -38,6 +38,8 @@ public class ManagerController {
      */
     @RequestMapping("/saveThisStudent")
     public String saveThisStudent(@RequestBody Student student) {
+        QueryWrapper<Grade> queryWrapper = new QueryWrapper<>();
+        student.setGradeid(gradeService.list(queryWrapper.orderByAsc("gradeid")).get(0).getGradeid());
         boolean addStudentFlag = studentService.save(student);
         UserLogin userLogin = new UserLogin();
         userLogin.setUserid(studentService.selectId(student).getStudentid());
@@ -77,10 +79,9 @@ public class ManagerController {
      * @return
      */
     @RequestMapping("/removeAnyStudents")
-    public String removeAnyStudents(Integer[] studentids) {
-        List<Integer> allStudentid = Arrays.asList(studentids);
+    public String removeAnyStudents(@RequestBody Integer[] studentids) {
         boolean removeStudentsFlag = studentService.removeAnyStudents(studentids);
-        boolean removeStudentUsersFlag = userLoginService.removeByIds(allStudentid);
+        boolean removeStudentUsersFlag = userLoginService.removeUser(studentids);
         if (removeStudentsFlag && removeStudentUsersFlag) {
             return "success";
         } else {
@@ -102,12 +103,13 @@ public class ManagerController {
         String username = queryMap.get("filter");
         return userLoginService.getAllUser(limit, page, username);
     }
+
     @RequestMapping("/getAllStudent")
     public Map<String, Object> getAllStudent(@RequestBody Map<String, String> queryMap) {
         //获取每个查询参数
         int limit = Integer.parseInt(queryMap.get("limit"));
         int page = Integer.parseInt(queryMap.get("page"));
         String studentName = queryMap.get("filter");
-        return studentService.getAllstudent(limit,page,studentName);
+        return studentService.getAllstudent(limit, page, studentName);
     }
 }

@@ -9,8 +9,8 @@
     </select>
     <update id="deleteAnyStudents">
         update student set flag = 1
-        where studentid in 
-        <foreach collection="studentid" separator="," open="(" close=")" item="studentid">
+        where studentid in
+        <foreach collection="array" separator="," open="(" close=")" item="studentid">
             #{studentid}
         </foreach>
     </update>
@@ -37,13 +37,12 @@
     </select>
     <select id="selectAllStudent" resultType="java.util.HashMap">
         select studentid,student_name,sex,nation,birthday,native_place,
-        marital_status,phone,id_number,college,major
+        marital_status,phone,id_number,college,major,gradeid
         from student
-        <where>
-            <if test="studentName != null and studentName !=''">
-                student_name like concat('%',#{studentName},'%')
-            </if>
-        </where>
+        where flag = 0
+        <if test="studentName != null and studentName !=''">
+            and student_name like concat('%',#{studentName},'%')
+        </if>
         order by gradeid desc
     </select>
 </mapper>

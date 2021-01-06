@@ -37,4 +37,11 @@
         from userlogin
         where userid = #{userid}
     </select>
+    <delete id="removeUser">
+        delete from userlogin
+        where userid in
+        <foreach collection="array" separator="," open="(" close=")" item="studentid">
+            #{studentid}
+        </foreach>
+    </delete>
 </mapper>

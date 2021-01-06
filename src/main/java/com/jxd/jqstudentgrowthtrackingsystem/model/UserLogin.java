@@ -1,5 +1,7 @@
 package com.jxd.jqstudentgrowthtrackingsystem.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * @ClassName UserLogin
  * @Description TODO
@@ -7,6 +9,7 @@ package com.jxd.jqstudentgrowthtrackingsystem.model;
  * @Date 2020/12/31 9:24
  * @Version 1.0
  */
+@TableName("userlogin")
 public class UserLogin {
     //用户id
     private int userid;

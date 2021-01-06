@@ -51,5 +51,12 @@ public interface IUserLoginDao extends BaseMapper<UserLogin> {
      * @return
      */
     IPage<Map<String, Object>> selectAllUser(Page<Map<String,Object>> page,
-                                                 @Param("username") String username);
+                                             @Param("username") String username);
+
+    /**
+     * 批量删除
+     * @param userid
+     * @return
+     */
+    boolean removeUser(Integer[] userid);
 }

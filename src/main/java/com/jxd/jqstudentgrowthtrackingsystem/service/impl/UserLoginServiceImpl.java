@@ -62,4 +62,9 @@ public class UserLoginServiceImpl extends ServiceImpl<IUserLoginDao, UserLogin> 
     public UserLogin getMyPassword(Integer userid) {
         return userLoginDao.getMyPassword(userid);
     }
+
+    @Override
+    public boolean removeUser(Integer[] userid) {
+        return userLoginDao.removeUser(userid);
+    }
 }

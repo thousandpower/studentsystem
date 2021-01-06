@@ -2,6 +2,7 @@ package com.jxd.jqstudentgrowthtrackingsystem.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
@@ -48,4 +49,10 @@ public interface IUserLoginService extends IService<UserLogin> {
      * @return
      */
     UserLogin getMyPassword(Integer userid);
+    /**
+     * 批量删除
+     * @param userid
+     * @return
+     */
+    boolean removeUser(Integer[] userid);
 }
