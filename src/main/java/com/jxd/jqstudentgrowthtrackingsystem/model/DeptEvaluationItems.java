@@ -30,18 +30,11 @@ public class DeptEvaluationItems {
     private int moralQuality;
 
     /*性格*/
-    private int character;
+    private int characters;
     /*工作年份*/
     @TableField("work_year")
     private int workYear;
 
-    public int getWorkYear() {
-        return workYear;
-    }
-
-    public void setWorkYear(int workYear) {
-        this.workYear = workYear;
-    }
 
     public int getStudentid() {
         return studentid;
@@ -83,23 +76,32 @@ public class DeptEvaluationItems {
         this.moralQuality = moralQuality;
     }
 
-    public int getCharacter() {
-        return character;
+    public int getCharacters() {
+        return characters;
     }
 
-    public void setCharacter(int character) {
-        this.character = character;
+    public void setCharacters(int characters) {
+        this.characters = characters;
     }
 
-    public DeptEvaluationItems(int studentid, int ability, int initiative, int communication, int moralQuality, int character) {
+    public int getWorkYear() {
+        return workYear;
+    }
+
+    public void setWorkYear(int workYear) {
+        this.workYear = workYear;
+    }
+
+    public DeptEvaluationItems() {
+    }
+
+    public DeptEvaluationItems(int studentid, int ability, int initiative, int communication, int moralQuality, int characters, int workYear) {
         this.studentid = studentid;
         this.ability = ability;
         this.initiative = initiative;
         this.communication = communication;
         this.moralQuality = moralQuality;
-        this.character = character;
-    }
-
-    public DeptEvaluationItems() {
+        this.characters = characters;
+        this.workYear = workYear;
     }
 }

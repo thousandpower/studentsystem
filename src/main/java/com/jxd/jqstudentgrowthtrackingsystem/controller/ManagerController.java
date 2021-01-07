@@ -80,6 +80,11 @@ public class ManagerController {
     }
 
 
+    /**
+     * 新增或编辑
+     * @param deptEvaluator
+     * @return
+     */
     @PostMapping("/addOrUpdDeptEvaluator")
     public String addOrUpdDeptEvaluator(@RequestBody DeptEvaluator deptEvaluator) {
         //用于判断是否是新增。
@@ -90,17 +95,16 @@ public class ManagerController {
         }
         boolean isAddOrUpdInDeEv = deptEvaluatorService.saveOrUpdate(deptEvaluator);
         boolean isAddOrUpdInUserLogin;
-
+        //用于修改操作
         UpdateWrapper wrapper = new UpdateWrapper();
         wrapper.set("username", deptEvaluator.getUsername());
         wrapper.set("password", "a123456");
         wrapper.set("role", 2);
-
         //如果是新增，且在部门评价人表中新增更新成功
         if (isAdd && isAddOrUpdInDeEv) {
-
             UserLogin userLogin = new UserLogin(deptEvaluator.getEvaluatorid(), deptEvaluator.getUsername(), "a123456", 2);
             isAddOrUpdInUserLogin = userLoginService.saveOrUpdate(userLogin);
+            //如果是不是新增，即是修改，则需要进行用户表的更新操作
         } else {
             wrapper.eq("userid", deptEvaluator.getEvaluatorid());
             isAddOrUpdInUserLogin = userLoginService.update(wrapper);
@@ -131,16 +135,13 @@ public class ManagerController {
         AbstractWrapper wrapper = new QueryWrapper();
         wrapper.eq("deptno", deptEvaluator.getDeptno());
         wrapper.eq("flag",0);
-
         UpdateWrapper updateWrapper = new UpdateWrapper();
         updateWrapper.eq("evaluatorid",evaluatoridSub);
         updateWrapper.set("flag",1);
-
         int evaluatorCountInDeptnos = deptEvaluatorService.count(wrapper);
         boolean isDel = false;
         boolean isUpdFlag = false;
         if (evaluatorCountInDeptnos > 1) {
-
             isUpdFlag = deptEvaluatorService.update(updateWrapper);
             if (isUpdFlag){
                 isDel = userLoginService.removeById(evaluatoridSub);
@@ -213,11 +214,9 @@ public class ManagerController {
         String deptid = deptno.substring(0, deptno.length() - 1);
         AbstractWrapper wrapper = new QueryWrapper();
         wrapper.eq("deptno", deptid);
-
         int studentCountInDeptnos = studentService.count(wrapper);
         int evaluatorCountInDeptnos = deptEvaluatorService.count(wrapper);
         int count = studentCountInDeptnos + evaluatorCountInDeptnos;
-
         boolean isDel = false;
         if (count == 0) {
             isDel = deptService.removeById(deptid);

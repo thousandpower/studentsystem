@@ -2,6 +2,7 @@ package com.jxd.jqstudentgrowthtrackingsystem.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * @ClassName Student
@@ -10,10 +11,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @Date 2020/12/31 9:28
  * @Version 1.0
  */
+@TableName("student")
 public class Student {
     //学生id
-    @TableId
+    @TableId("studentid")
     private int studentid;
+
     //学生姓名
     @TableField("student_name")
     private String studentName;
@@ -74,6 +77,9 @@ public class Student {
         this.flag = flag;
         this.remarks = remarks;
         this.jobid = jobid;
+    }
+
+    public Student() {
     }
 
     public int getStudentid() {
@@ -218,8 +224,5 @@ public class Student {
 
     public void setJobid(int jobid) {
         this.jobid = jobid;
-    }
-
-    public Student() {
     }
 }

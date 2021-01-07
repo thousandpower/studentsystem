@@ -23,9 +23,15 @@ public class DeptEvaluatorServiceImpl  extends ServiceImpl<IDeptEvaluatorDao, De
     @Autowired
     private IDeptEvaluatorDao deptEvaluatorDao;
 
+    /**
+     * 分页模糊查询项目评价人信息
+     * @param deptEvaluatorName 模糊查询姓名
+     * @param limit 每页显示数量
+     * @param page  页码
+     * @return 分页查询项目评价人的信息
+     */
     @Override
     public Map<String, Object>  getDeptEvaluatorsByPage(String deptEvaluatorName, int limit, int page) {
-
         //构造分页对象
         Page<Map<String, Object>> pages = new Page<>(page, limit);
         Map<String, Object> map = new HashMap<>();
