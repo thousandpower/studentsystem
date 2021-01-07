@@ -43,6 +43,9 @@
         <if test="studentName != null and studentName !=''">
             and student_name like concat('%',#{studentName},'%')
         </if>
+        <if test="gradeid != '全部' and gradeid != null and gradeid !=''">
+            and gradeid = #{gradeid}
+        </if>
         order by gradeid desc
     </select>
 </mapper>

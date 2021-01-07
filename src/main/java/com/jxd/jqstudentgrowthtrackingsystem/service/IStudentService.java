@@ -54,5 +54,5 @@ public interface IStudentService extends IService<Student> {
      * @param studentName
      * @return
      */
-    Map<String, Object> getAllstudent(int limit, int page, String studentName);
+    Map<String, Object> getAllstudent(int limit, int page, String studentName,String gradeid);
 }

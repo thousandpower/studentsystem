@@ -36,7 +36,8 @@ public interface IStudentDao extends BaseMapper<Student> {
      * @return
      */
     IPage<Map<String, Object>> selectAllStudent(Page<Map<String,Object>> page,
-                                             @Param("studentName") String studentName);
+                                             @Param("studentName") String studentName,
+                                                @Param("gradeid") String gradeid);
 
     /**
      * 学员培训学校评价

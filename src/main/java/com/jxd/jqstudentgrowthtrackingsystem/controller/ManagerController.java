@@ -31,16 +31,6 @@ public class ManagerController {
     private IJobService jobService;
 
 
-    @RequestMapping("/chkIdNumber/{idNumber}")
-    public String chkIdNumber(@PathVariable String idNumber) {
-        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-        if (studentService.list(queryWrapper.eq("id_number", idNumber)) != null) {
-            return "have";
-        } else {
-            return "none";
-        }
-    }
-
     /**
      * 新增学员及学员用户
      *
@@ -123,7 +113,8 @@ public class ManagerController {
         int limit = Integer.parseInt(queryMap.get("limit"));
         int page = Integer.parseInt(queryMap.get("page"));
         String studentName = queryMap.get("filter");
-        return studentService.getAllstudent(limit, page, studentName);
+        String gradeid = queryMap.get("gradeid");
+        return studentService.getAllstudent(limit, page, studentName,gradeid);
     }
 
     /**
@@ -134,7 +125,8 @@ public class ManagerController {
     @RequestMapping("/getAllGrade")
     public Map<String, Object> getAllGrade() {
         Map<String, Object> map = new HashMap<>();
-        List<Grade> gradeList = gradeService.list();
+        QueryWrapper<Grade> queryWrapper = new QueryWrapper<>();
+        List<Grade> gradeList = gradeService.list(queryWrapper.orderByDesc("gradeid"));
         List<Integer> gradeid = new ArrayList<>();
         for (int i = 0; i < gradeList.size(); i++) {
             gradeid.add(gradeList.get(i).getGradeid());
