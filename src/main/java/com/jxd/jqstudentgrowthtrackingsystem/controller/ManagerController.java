@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName: ManagerController
@@ -29,6 +26,8 @@ public class ManagerController {
     private IUserLoginService userLoginService;
     @Autowired
     private IGradeService gradeService;
+    @Autowired
+    private IJobService jobService;
 
     /**
      * 新增学员及学员用户
@@ -38,8 +37,6 @@ public class ManagerController {
      */
     @RequestMapping("/saveThisStudent")
     public String saveThisStudent(@RequestBody Student student) {
-        QueryWrapper<Grade> queryWrapper = new QueryWrapper<>();
-        student.setGradeid(gradeService.list(queryWrapper.orderByAsc("gradeid")).get(0).getGradeid());
         boolean addStudentFlag = studentService.save(student);
         UserLogin userLogin = new UserLogin();
         userLogin.setUserid(studentService.selectId(student).getStudentid());
@@ -104,6 +101,11 @@ public class ManagerController {
         return userLoginService.getAllUser(limit, page, username);
     }
 
+    /**
+     * 获取全部学员
+     * @param queryMap
+     * @return
+     */
     @RequestMapping("/getAllStudent")
     public Map<String, Object> getAllStudent(@RequestBody Map<String, String> queryMap) {
         //获取每个查询参数
@@ -111,5 +113,28 @@ public class ManagerController {
         int page = Integer.parseInt(queryMap.get("page"));
         String studentName = queryMap.get("filter");
         return studentService.getAllstudent(limit, page, studentName);
+    }
+
+    /**
+     * 获取全部班期
+     * @return
+     */
+    @RequestMapping("/getAllGrade")
+    public Map<String,Object> getAllGrade(){
+        Map<String,Object> map = new HashMap<>();
+        List<Grade> gradeList =gradeService.list();
+        List<Integer> gradeid = new ArrayList<>();
+        for (int i = 0; i < gradeList.size(); i++) {
+            gradeid.add(gradeList.get(i).getGradeid());
+        }
+        map.put("data",gradeid);
+        return map;
+    }
+    @RequestMapping("/getStudentJob")
+    public Map<String,Object> getStudentJob(){
+        Map<String,Object> map = new HashMap<>();
+        QueryWrapper<Job> queryWrapper = new QueryWrapper<>();
+        map.put("data",jobService.list(queryWrapper.eq("jobid",5)));
+        return map;
     }
 }
