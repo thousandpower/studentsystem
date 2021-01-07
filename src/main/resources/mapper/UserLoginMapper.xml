@@ -44,4 +44,9 @@
             #{studentid}
         </foreach>
     </delete>
+    <update id="updateUsername">
+        update userlogin
+        set username = #{username}
+        where userid = #{userid}
+    </update>
 </mapper>

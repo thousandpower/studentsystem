@@ -4,12 +4,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
-  servlet:
-    multipart:
-      enabled: true
-      file-size-threshold: 0
-      max-file-size: 100MB
-      max-request-size: 100MB
 
 
 mybatis-plus:

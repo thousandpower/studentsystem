@@ -6,6 +6,7 @@ import com.jxd.jqstudentgrowthtrackingsystem.model.*;
 import com.jxd.jqstudentgrowthtrackingsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,17 @@ public class ManagerController {
     private IGradeService gradeService;
     @Autowired
     private IJobService jobService;
+
+
+    @RequestMapping("/chkIdNumber/{idNumber}")
+    public String chkIdNumber(@PathVariable String idNumber) {
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        if (studentService.list(queryWrapper.eq("id_number", idNumber)) != null) {
+            return "have";
+        } else {
+            return "none";
+        }
+    }
 
     /**
      * 新增学员及学员用户
@@ -59,10 +71,8 @@ public class ManagerController {
     @RequestMapping("/editThisStudent")
     public String editThisStudent(@RequestBody Student student) {
         boolean editStudentFlag = studentService.updateById(student);
-        UserLogin userLogin = userLoginService.getById(student.getStudentid());
-        userLogin.setUsername(student.getStudentName());
-        boolean editStudentUserFlag = userLoginService.updateById(userLogin);
-        if (editStudentFlag && editStudentUserFlag) {
+        boolean editUserFlag = userLoginService.updateUsername(student.getStudentName(),student.getStudentid());
+        if (editStudentFlag && editUserFlag) {
             return "success";
         } else {
             return "fail";
@@ -103,6 +113,7 @@ public class ManagerController {
 
     /**
      * 获取全部学员
+     *
      * @param queryMap
      * @return
      */
@@ -117,24 +128,26 @@ public class ManagerController {
 
     /**
      * 获取全部班期
+     *
      * @return
      */
     @RequestMapping("/getAllGrade")
-    public Map<String,Object> getAllGrade(){
-        Map<String,Object> map = new HashMap<>();
-        List<Grade> gradeList =gradeService.list();
+    public Map<String, Object> getAllGrade() {
+        Map<String, Object> map = new HashMap<>();
+        List<Grade> gradeList = gradeService.list();
         List<Integer> gradeid = new ArrayList<>();
         for (int i = 0; i < gradeList.size(); i++) {
             gradeid.add(gradeList.get(i).getGradeid());
         }
-        map.put("data",gradeid);
+        map.put("data", gradeid);
         return map;
     }
+
     @RequestMapping("/getStudentJob")
-    public Map<String,Object> getStudentJob(){
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> getStudentJob() {
+        Map<String, Object> map = new HashMap<>();
         QueryWrapper<Job> queryWrapper = new QueryWrapper<>();
-        map.put("data",jobService.list(queryWrapper.eq("jobid",5)));
+        map.put("data", jobService.list(queryWrapper.eq("jobid", 5)).get(0).getJobid());
         return map;
     }
 }

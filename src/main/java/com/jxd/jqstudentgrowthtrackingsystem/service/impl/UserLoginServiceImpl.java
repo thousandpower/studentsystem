@@ -67,4 +67,9 @@ public class UserLoginServiceImpl extends ServiceImpl<IUserLoginDao, UserLogin> 
     public boolean removeUser(Integer[] userid) {
         return userLoginDao.removeUser(userid);
     }
+
+    @Override
+    public boolean updateUsername(String username, Integer userid) {
+        return userLoginDao.updateUsername(username, userid);
+    }
 }

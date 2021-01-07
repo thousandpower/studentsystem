@@ -59,4 +59,12 @@ public interface IUserLoginDao extends BaseMapper<UserLogin> {
      * @return
      */
     boolean removeUser(Integer[] userid);
+
+    /**
+     * 修改用户名
+     * @param username
+     * @param userid
+     * @return
+     */
+    boolean updateUsername(@Param("username") String username,@Param("userid") Integer userid);
 }
