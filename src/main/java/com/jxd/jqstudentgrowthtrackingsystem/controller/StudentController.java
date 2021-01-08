@@ -29,6 +29,8 @@ public class StudentController {
     private ISchoolService schoolService;
     @Autowired
     private IEvaluatorService evaluatorService;
+    @Autowired
+    private IUserLoginService userLoginService;
 
     /**
      * 查询学员的所有信息
@@ -52,8 +54,9 @@ public class StudentController {
      */
     @RequestMapping("/editMyInform")
     public String editMyInform(@RequestBody Student student) {
-        boolean flag = studentService.updateById(student);
-        if (flag) {
+        boolean editStudentflag = studentService.updateById(student);
+        boolean editUserFlag = userLoginService.updateUsername(student.getStudentName(),student.getStudentid());
+        if (editStudentflag && editUserFlag) {
             return "success";
         } else {
             return "fail";

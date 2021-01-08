@@ -39,7 +39,7 @@ public class PublicController {
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority", 0);
+        wrapper.eq("authority", 3);
         wrapper.or();
         wrapper.eq("authority", 4);
 
@@ -130,7 +130,7 @@ public class PublicController {
         if (!file.exists()) {
             file.mkdirs();
         }
-        // 文件存储
+        //文件存储
         //上传文件项
         //获取上传文件的名称
         String filename = multipartFile.getOriginalFilename();

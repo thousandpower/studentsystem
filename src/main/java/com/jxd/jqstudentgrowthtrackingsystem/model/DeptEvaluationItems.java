@@ -30,7 +30,7 @@ public class DeptEvaluationItems {
     private int moralQuality;
 
     /*性格*/
-    private int character;
+    private int characters;
     /*工作年份*/
     @TableField("work_year")
     private int workYear;
@@ -83,21 +83,21 @@ public class DeptEvaluationItems {
         this.moralQuality = moralQuality;
     }
 
-    public int getCharacter() {
-        return character;
+    public int getCharacters() {
+        return characters;
     }
 
-    public void setCharacter(int character) {
-        this.character = character;
+    public void setCharacters(int characters) {
+        this.characters = characters;
     }
 
-    public DeptEvaluationItems(int studentid, int ability, int initiative, int communication, int moralQuality, int character) {
+    public DeptEvaluationItems(int studentid, int ability, int initiative, int communication, int moralQuality, int characters) {
         this.studentid = studentid;
         this.ability = ability;
         this.initiative = initiative;
         this.communication = communication;
         this.moralQuality = moralQuality;
-        this.character = character;
+        this.characters = characters;
     }
 
     public DeptEvaluationItems() {
