@@ -33,17 +33,24 @@ public class DeptEvaluation {
     /*工作年份*/
     @TableField("work_year")
     private int workYear;
+    /*部门编号*/
+    private int deptno;
+    /*职务编号*/
+    private int jobid;
 
-    public int getWorkYear() {
-        return workYear;
-    }
-
-    public void setWorkYear(int workYear) {
+    public DeptEvaluation(int studentid, int gradeid, int evaluatorid, int appraisalScore, String appraisalContent, int workYear, int deptno, int jobid) {
+        this.studentid = studentid;
+        this.gradeid = gradeid;
+        this.evaluatorid = evaluatorid;
+        this.appraisalScore = appraisalScore;
+        this.appraisalContent = appraisalContent;
         this.workYear = workYear;
+        this.deptno = deptno;
+        this.jobid = jobid;
     }
 
-    /*评价时间标识*/
-    private int date;
+    public DeptEvaluation() {
+    }
 
     public int getStudentid() {
         return studentid;
@@ -85,25 +92,28 @@ public class DeptEvaluation {
         this.appraisalContent = appraisalContent;
     }
 
-
-    public int getDate() {
-        return date;
+    public int getWorkYear() {
+        return workYear;
     }
 
-    public void setDate(int date) {
-        this.date = date;
+    public void setWorkYear(int workYear) {
+        this.workYear = workYear;
     }
 
-    public DeptEvaluation(int studentid, int gradeid, int evaluatorid, int appraisalScore, String appraisalContent, int date) {
-        this.studentid = studentid;
-        this.gradeid = gradeid;
-        this.evaluatorid = evaluatorid;
-        this.appraisalScore = appraisalScore;
-        this.appraisalContent = appraisalContent;
-        this.date = date;
+    public int getDeptno() {
+        return deptno;
     }
 
-    public DeptEvaluation() {
+    public void setDeptno(int deptno) {
+        this.deptno = deptno;
+    }
+
+    public int getJobid() {
+        return jobid;
+    }
+
+    public void setJobid(int jobid) {
+        this.jobid = jobid;
     }
 }
 

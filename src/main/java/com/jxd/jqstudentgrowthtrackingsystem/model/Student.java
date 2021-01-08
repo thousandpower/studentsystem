@@ -29,7 +29,7 @@ public class Student {
     //籍贯
     @TableField("native_place")
     private String nativePlace;
-    //婚姻状态
+    //婚姻状态 0未婚 1已婚 2丧偶 3离婚
     @TableField("marital_status")
     private int maritalStatus;
     //电话号码
