@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IDeptEvaluationDao">
+    <!--按年份获取Map<String,Object> getDeptEvaluationInfoByYear
+    (@Param("studentno") int studentno,@Param("workYear") int workYear);-->
+    <select id="getDeptEvaluationInfoByYear" resultType="java.util.Map">
+		SELECT s.studentid,den.deptno,den.jobid,d.deptname,j.jobname,den.evaluatorid,deor.username,dei.ability,dei.initiative,dei.communication,
+		dei.moral_quality,dei.characters,dei.work_year,den.appraisal_score,den.appraisal_content,date_format(s.hiredate,'%Y-%m-%d') hiredate
+		FROM dept_evaluation den LEFT JOIN student s on den.studentid = s.studentid
+		LEFT JOIN job j on den.jobid = j.jobid
+		LEFT JOIN dept d on den.deptno = d.deptno
+		LEFT JOIN dept_evaluation_items dei ON den.studentid = dei.studentid and den.work_year = dei.work_year
+		LEFT JOIN dept_evaluator deor ON deor.evaluatorid = den.evaluatorid
+		WHERE den.studentid = #{studentno} and dei.work_year = #{workYear}
+    </select>
+
+</mapper>

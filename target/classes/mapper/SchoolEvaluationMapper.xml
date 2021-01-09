@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.ISchoolEvaluationDao">
+
+    <!--获取学校评价的信息：Map<String, Object> getSchoolEvaluationInfo(int studentno);-->
+    <select id="getSchoolEvaluationInfo" resultType="java.util.Map">
+        SELECT se.studentid,se.gradeid,se.evaluatorid,te.username teachername,cs.html,cs.oracle,cs.js,cs.java_base,cs.java_high,cs.l1,
+        se.appraisal_score,se.appraisal_content
+        FROM school_evaluation se LEFT JOIN  teacher te ON se.evaluatorid = te.teacherid
+        LEFT JOIN  course_score cs on se.studentid = cs.studentid
+        WHERE se.studentid = #{studentno}
+    </select>
+
+
+
+
+
+
+</mapper>
