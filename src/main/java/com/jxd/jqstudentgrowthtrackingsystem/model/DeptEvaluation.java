@@ -17,9 +17,6 @@ public class DeptEvaluation {
     @TableId("studentid")
     private int studentid;
 
-    /*课程编号*/
-    private int gradeid;
-
     /*评价人编号*/
     private int evaluatorid;
 
@@ -31,16 +28,16 @@ public class DeptEvaluation {
     @TableField("appraisal_content")
     private String appraisalContent;
     /*工作年份*/
-    @TableField("work_year")
+    @TableId("work_year")
     private int workYear;
     /*部门编号*/
     private int deptno;
     /*职务编号*/
     private int jobid;
 
-    public DeptEvaluation(int studentid, int gradeid, int evaluatorid, int appraisalScore, String appraisalContent, int workYear, int deptno, int jobid) {
+    public DeptEvaluation(int studentid, int evaluatorid, int appraisalScore, String appraisalContent, int workYear, int deptno, int jobid) {
         this.studentid = studentid;
-        this.gradeid = gradeid;
+
         this.evaluatorid = evaluatorid;
         this.appraisalScore = appraisalScore;
         this.appraisalContent = appraisalContent;
@@ -58,14 +55,6 @@ public class DeptEvaluation {
 
     public void setStudentid(int studentid) {
         this.studentid = studentid;
-    }
-
-    public int getGradeid() {
-        return gradeid;
-    }
-
-    public void setGradeid(int gradeid) {
-        this.gradeid = gradeid;
     }
 
     public int getEvaluatorid() {

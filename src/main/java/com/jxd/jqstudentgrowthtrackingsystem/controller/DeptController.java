@@ -4,11 +4,10 @@ package com.jxd.jqstudentgrowthtrackingsystem.controller;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jxd.jqstudentgrowthtrackingsystem.dao.IDeptEvaluationDao;
+import com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluation;
+import com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluationItems;
 import com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluator;
-import com.jxd.jqstudentgrowthtrackingsystem.service.IDeptEvaluationService;
-import com.jxd.jqstudentgrowthtrackingsystem.service.IDeptEvaluatorService;
-import com.jxd.jqstudentgrowthtrackingsystem.service.ISchoolEvaluationService;
-import com.jxd.jqstudentgrowthtrackingsystem.service.IStudentService;
+import com.jxd.jqstudentgrowthtrackingsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +34,8 @@ public class DeptController {
     private ISchoolEvaluationService schoolEvaluationService;
     @Autowired
     private IDeptEvaluationService deptEvaluationService;
-
+    @Autowired
+    private IDeptEvaluationItemService deptEvaluationItemService;
 
     /**
      * 用于总表中的学生信息展示
@@ -69,7 +69,7 @@ public class DeptController {
         int studentno = Integer.valueOf(studentid.substring(0, studentid.length() - 1));
         Map<String, Object> map = new HashMap<>();
         //学生基础信息
-        map.put("studentInfo", studentService.getById(studentno));
+        map.put("studentInfo", studentService.getStudentById(studentno));
         //学校评价
         map.put("studentEvaInfoSc", schoolEvaluationService.getSchoolEvaluationInfo(studentno));
         //部门评价（0 1 2 3  分别为转正 一年 两年 三年评价）
@@ -82,7 +82,7 @@ public class DeptController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
-             date =simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0).get("hiredate"));
+             date =simpleDateFormat.parse((String) studentService.getStudentById(studentno).get("hiredate"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -102,5 +102,49 @@ public class DeptController {
         return map;
     }
 
+    /**
+     * 添加或更新评价信息
+     * @param map 评价的表单信息
+     * @return 成功或失败的标识
+     */
+    @PostMapping("/addOrUpdDeptEvaluation")
+    public String addOrUpdDeptEvaluation(@RequestBody Map<String,String> map){
+
+        int studentid =Integer.parseInt(map.get("studentid"));
+        int evaluatorid = Integer.parseInt(map.get("evaluatorid"));
+        int appraisalScore = Integer.parseInt(map.get("appraisal_score"));
+        String appraisalContent = map.get("appraisal_content");
+        int workYear = Integer.parseInt(map.get("work_year"));
+        int deptno = Integer.parseInt(map.get("deptno"));
+        int jobid = Integer.parseInt(map.get("jobid"));
+
+        DeptEvaluation deptEvaluation = new DeptEvaluation(studentid,evaluatorid,appraisalScore,appraisalContent,workYear,deptno,jobid);
+        boolean isAddOrUpd = deptEvaluationService.save(deptEvaluation);
+
+        int ability = Integer.parseInt(map.get("ability"));
+        int initiative = Integer.parseInt(map.get("initiative"));
+        int communication = Integer.parseInt(map.get("communication"));
+        int moralQuality = Integer.parseInt(map.get("moral_quality"));
+        int characters = Integer.parseInt(map.get("characters"));
+
+        DeptEvaluationItems deptEvaluationItems =  new DeptEvaluationItems(studentid,ability,initiative,communication,moralQuality,characters,workYear);
+        boolean isAddOrUpdItems = deptEvaluationItemService.save(deptEvaluationItems);
+        if (isAddOrUpd && isAddOrUpdItems){
+            return "success";
+        }else {
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.eq("studentid",studentid);
+            wrapper.eq("work_year",workYear);
+            deptEvaluationService.remove(wrapper);
+            deptEvaluationItemService.remove(wrapper);
+            return "fail";
+        }
+
+
+
+
+
+
+    }
 
 }

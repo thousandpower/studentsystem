@@ -32,7 +32,7 @@ public class DeptEvaluationItems {
     /*性格*/
     private int characters;
     /*工作年份*/
-    @TableField("work_year")
+    @TableId("work_year")
     private int workYear;
 
 

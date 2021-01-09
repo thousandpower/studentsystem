@@ -32,5 +32,14 @@ WHERE student_name LIKE '%' #{studentName} '%'  and a.deptno = #{deptno}
 
     </select>
 
+    <!--通过学生id获取学生信息：Map<String, Object> getStudentById(int studentid);-->
+    <select id="getStudentById" resultType="java.util.Map">
+    SELECT s.studentid,s.student_name,s.sex,s.nation,s.birthday,s.native_place,s.marital_status,s.phone,s.id_number,
+    date_format(s.hiredate,'%Y-%m-%d') hiredate,s.college,s.major,s.images_directory,s.deptno,s.gradeid,s.flag,s.remarks,s.jobid,j.jobname,d.deptname
+    FROM student s LEFT JOIN dept d ON  s.deptno = d.deptno
+    LEFT JOIN job j  ON s.jobid = j.jobid
+    WHERE s.studentid = #{studentid}
+
+    </select>
 
 </mapper>

@@ -15,4 +15,5 @@ public interface IDeptEvaluationService extends IService<DeptEvaluation> {
      */
     Map<String, Object>  getDeptEvaluationInfoByYear(int studentno, int workYear);
 
+
 }

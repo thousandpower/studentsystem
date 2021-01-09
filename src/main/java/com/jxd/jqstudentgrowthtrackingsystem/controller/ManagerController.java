@@ -81,9 +81,9 @@ public class ManagerController {
 
 
     /**
-     * 新增或编辑
-     * @param deptEvaluator
-     * @return
+     * 新增或编辑部门评价人
+     * @param deptEvaluator 部门评价人
+     * @return 是否成功的标志
      */
     @PostMapping("/addOrUpdDeptEvaluator")
     public String addOrUpdDeptEvaluator(@RequestBody DeptEvaluator deptEvaluator) {
@@ -143,6 +143,7 @@ public class ManagerController {
         boolean isUpdFlag = false;
         if (evaluatorCountInDeptnos > 1) {
             isUpdFlag = deptEvaluatorService.update(updateWrapper);
+            //更新离职状态后，删除登录表中的对应信息，无法登录
             if (isUpdFlag){
                 isDel = userLoginService.removeById(evaluatoridSub);
             }

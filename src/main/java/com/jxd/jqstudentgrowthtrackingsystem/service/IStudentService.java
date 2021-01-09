@@ -28,7 +28,21 @@ public interface IStudentService extends IService<Student> {
      */
     boolean removeAnyStudents(Integer[] studentids);
 
+    /**
+     *  按部门号分页模糊查询学生
+     * @param studentname 学生姓名 （模糊查询）
+     * @param deptno 部门编号
+     * @param limit 每页条数
+     * @param page 页码
+     * @return 学生信息
+     */
     Map<String, Object> getStudentByPageAndDeptno(String studentname, int deptno,int limit, int page);
 
+    /**
+     * 通过id获取学生信息（联表获取部门名称和职务名称）
+     * @param studentid 学生编号
+     * @return 学生信息集合
+     */
+    Map<String, Object> getStudentById(int studentid);
 
 }
