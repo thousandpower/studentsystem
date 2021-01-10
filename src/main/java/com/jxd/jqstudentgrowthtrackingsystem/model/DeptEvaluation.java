@@ -17,9 +17,6 @@ public class DeptEvaluation {
     @TableId("studentid")
     private int studentid;
 
-    /*课程编号*/
-    private int gradeid;
-
     /*评价人编号*/
     private int evaluatorid;
 
@@ -50,13 +47,6 @@ public class DeptEvaluation {
         this.studentid = studentid;
     }
 
-    public int getGradeid() {
-        return gradeid;
-    }
-
-    public void setGradeid(int gradeid) {
-        this.gradeid = gradeid;
-    }
 
     public int getEvaluatorid() {
         return evaluatorid;
@@ -83,9 +73,8 @@ public class DeptEvaluation {
     }
 
 
-    public DeptEvaluation(int studentid, int gradeid, int evaluatorid, int appraisalScore, String appraisalContent) {
+    public DeptEvaluation(int studentid, int evaluatorid, int appraisalScore, String appraisalContent) {
         this.studentid = studentid;
-        this.gradeid = gradeid;
         this.evaluatorid = evaluatorid;
         this.appraisalScore = appraisalScore;
         this.appraisalContent = appraisalContent;
