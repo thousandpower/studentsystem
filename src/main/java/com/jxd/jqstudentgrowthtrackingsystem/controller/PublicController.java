@@ -39,7 +39,7 @@ public class PublicController {
 
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("authority", 0);
+        wrapper.eq("authority", 3);
         wrapper.or();
         wrapper.eq("authority", 4);
 
