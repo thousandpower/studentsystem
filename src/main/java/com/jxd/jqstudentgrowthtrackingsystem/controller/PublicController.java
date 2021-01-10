@@ -2,14 +2,11 @@ package com.jxd.jqstudentgrowthtrackingsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jxd.jqstudentgrowthtrackingsystem.config.UploadPhotoConfig;
 import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IMenuService;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IUserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -40,12 +37,14 @@ public class PublicController {
     public Map<String, Object> getAllMenu(@RequestBody String role) {
         String authority = role.substring(0, role.length() - 1);
         Map<String, Object> map = new HashMap<>();
+
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
         wrapper.eq("authority", authority);
         wrapper.or();
         //公共权限
         wrapper.eq("authority", 4);
+
         map.put("data", menuService.list(wrapper));
         map.put("status", 200);
         return map;
@@ -77,29 +76,26 @@ public class PublicController {
      * @param id 用户id
      * @return
      */
-    @RequestMapping("/getThisUser")
-    public Map<String, Object> getThisUser(Integer id) {
-        UserLogin userLogin = userLoginService.getById(id);
+    @RequestMapping("/getThisUser/{id}")
+    public Map<String, Object> getThisUser(@PathVariable Integer id) {
+        UserLogin userLogin = userLoginService.selectThisUser(id);
         Map<String, Object> map = new HashMap<>();
-        map.put("data", userLogin);
+        map.put("data",userLogin);
         map.put("status", 200);
         return map;
     }
 
     /**
-     * 修改或重置密码
+     * 修改密码
      *  lt
      * @param userLogin 用户对象
      * @return
      */
-    @RequestMapping("/editPwd")
+    @RequestMapping("/editMyPwd")
     public String editPwd(@RequestBody UserLogin userLogin) {
-        //对前端传递过来的数据中是否含有密码进行判断
-        if (userLogin.getPassword().length() == 0) {
-            userLogin.setPassword("a123456");
-        }
-        boolean flag = userLoginService.updateById(userLogin);
-        if (flag) {
+
+        boolean editUserFlag = userLoginService.updateThisUserPwd(userLogin);
+        if (editUserFlag) {
             return "success";
         } else {
             return "fail";
@@ -107,28 +103,63 @@ public class PublicController {
     }
 
     /**
-     * 头像上传
+     * 重置密码
+     * @param userid 用户编号
+     * @return  是否成功的标志
+     */
+    @RequestMapping("/resetMyPwd/{userid}")
+    public String resetPwd(@PathVariable Integer userid) {
+        boolean resetUserFlag = userLoginService.resetThisUserPwd(userid);
+        if (resetUserFlag) {
+            return "success";
+        } else {
+            return "fail";
+        }
+    }
+
+    /**
+     * 查询用户的密码
      *  lt
-     * @param file 头像文件
+     * @param userid
      * @return
      */
+    @RequestMapping("/getMyPassword/{userid}")
+    public Map<String, Object> getMyPassword(@PathVariable Integer userid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", userLoginService.getMyPassword(userid).getPassword());
+        return map;
+    }
+
+    /**
+     * 上传
+     * @param multipartFile
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/upload")
-    public String upload(MultipartFile file) throws IOException {
-        //处理文件名 添加UUID 保证每个文件名全局唯一
-        //获取原文件名
-        String fileName = file.getOriginalFilename();
-        //获取UUID 全局唯一的 32位字符串 包含数字字母和-
-        String uuid = UUID.randomUUID().toString();
-        String new_fileName = uuid + "_" + fileName;
-        //将文件存到服务器上
-        String path = UploadPhotoConfig.getPath();
-        File file_final = new File(path, new_fileName);
-        //判断文件所在文件夹是否存在
-        if (!file_final.getParentFile().exists()) {
-            file_final.getParentFile().mkdir();
+    public String upload(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+        // 文件存储位置，文件的目录要存在才行，可以先创建文件目录，然后进行存储
+        String filePath = "D:\\photo";
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.mkdirs();
         }
-        file.transferTo(file_final);
-        String photoPath = path + "\\" + new_fileName;
-        return photoPath;
+        //文件存储
+        //上传文件项
+        //获取上传文件的名称
+        String filename = multipartFile.getOriginalFilename();
+        System.out.println("filename:" + filename);
+        //把文件名称设置唯一值
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        filename = uuid + "-" + filename;
+        System.out.println("filename:" + filename);
+        //完成上传文件
+        File newFile = new File(filePath, filename);
+        multipartFile.transferTo(newFile);
+        // replaceAll 用来替换windows中的\\ 为 /
+        System.out.println(filename);
+        System.out.println(newFile.getAbsolutePath().replaceAll("\\\\", "/"));
+        //返回文件名 前台通过固定地址+文件名的方法访问该图片 存储使用的是相对路径
+        return filename;
     }
 }

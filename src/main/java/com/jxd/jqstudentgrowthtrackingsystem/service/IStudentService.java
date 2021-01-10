@@ -17,12 +17,10 @@ import java.util.Map;
 public interface IStudentService extends IService<Student> {
     /**
      * 查询学生id
-     *
      * @param student 学员对象
      * @return
      */
     Student selectId(Student student);
-
     /**
      * 删除学员
      *  lt
@@ -50,4 +48,30 @@ public interface IStudentService extends IService<Student> {
      */
     Map<String, Object> getStudentById(int studentid);
 
+
+    /**
+     * 学员培训学校评价
+     * lt
+     * @param studentid
+     * @return
+     */
+    Map<String, Object> selectThisStudentSchoolEvaluation(Integer studentid);
+
+    /**
+     * 学员转正及工作1-3年的评价
+     * lt
+     * @param studentid
+     * @param workYear
+     * @return
+     */
+    Map<String, Object> selectThisStudentDeptEvaluation(Integer studentid, int workYear);
+    /**
+     * 查询全部用户
+     * lt
+     * @param limit
+     * @param page
+     * @param studentName
+     * @return
+     */
+    Map<String, Object> getAllstudent(int limit, int page, String studentName,String gradeid);
 }

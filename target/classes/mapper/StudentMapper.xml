@@ -2,36 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IStudentDao">
+    <!--lt-->
+    <!--查询学员id，作为用户的id-->
     <select id="selectId" resultType="com.jxd.jqstudentgrowthtrackingsystem.model.Student">
         select studentid from student
         where student_name = #{studentName}
         and id_number = #{idNumber}
     </select>
+    <!--lt-->
+    <!--批量删除用户，只是不显示用户信息，不删除信息-->
     <update id="deleteAnyStudents">
         update student set flag = 1
         where studentid in
-        <foreach collection="studentid" separator="," open="(" close=")" item="studentid">
+        <foreach collection="array" separator="," open="(" close=")" item="studentid">
             #{studentid}
         </foreach>
     </update>
+    <!--lt-->
+    <!--查询这名学员的培训学校评价-->
+    <select id="selectThisStudentSchoolEvaluation" resultType="java.util.HashMap">
+        select st.studentid,st.student_name,co.html,co.oracle,
+        co.js,co.java_base,co.java_high,co.l1,te.teacherid,
+        te.username,sc.appraisal_score,sc.gradeid,sc.appraisal_content
+        from student st
+        left join course_score co on co.studentid = st.studentid
+        left join school_evaluation sc on sc.studentid = st.studentid
+        left join teacher te on te.teacherid = sc.evaluatorid
+        where st.studentid = #{studentid}
+    </select>
+    <!--lt-->
+    <!--查询这名学员的从转正到工作三年的部门评价-->
+    <select id="selectThisStudentDeptEvaluation" resultType="java.util.HashMap">
+        select den.appraisal_score,den.appraisal_content,de.deptname,
+        jo.jobname,des.ability,des.initiative,des.communication,des.moral_quality,
+        des.characters,der.username
+        from dept_evaluation den
+        LEFT JOIN dept_evaluation_items des on des.studentid = den.studentid and des.work_year = den.work_year
+        LEFT JOIN dept_evaluator der on der.evaluatorid = den.evaluatorid
+        LEFT JOIN dept de on de.deptno = den.deptno
+        LEFT JOIN job jo on jo.jobid = den.jobid
+        where den.studentid = #{studentid}
+        and den.work_year = #{workYear}
+    </select>
+    <!--lt-->
+    <!--查询所有学员，列表展示-->
+    <select id="selectAllStudent" resultType="java.util.HashMap">
+        select studentid,student_name,sex,nation,birthday,native_place,
+        marital_status,phone,id_number,college,major,gradeid
+        from student
+        where flag = 0
+        <if test="studentName != null and studentName !=''">
+            and student_name like concat('%',#{studentName},'%')
+        </if>
+        <if test="gradeid != '全部' and gradeid != null and gradeid !=''">
+            and gradeid = #{gradeid}
+        </if>
+        order by gradeid desc
+    </select>
 
 
     <!--fws-->
     <!--分页模糊查询 总表中的学生信息IPage<Map<String,Object>> getStudentByPageAndDeptno
     (Page<Map<String,Object>> pages,  @Param("studentName")String studentname, @Param("deptno")int deptno);-->
     <select id="getStudentByPageAndDeptno" resultType="java.util.Map">
-SELECT a.studentid,student_name,a.sex,a.college,a.native_place,a.school_score,a.html,a.oracle,a.js,a.java_base,a.java_high,a.l1
-,a.appraisal_score score0,b.appraisal_score score1,c.appraisal_score score2,d.appraisal_score score3,a.deptno,a.jobid
-FROM
-(SELECT s.studentid,s.student_name,s.sex,s.college,s.native_place,se.appraisal_score school_score,cs.html,cs.oracle,cs.js,cs.java_base,cs.java_high,cs.l1,de.appraisal_score,s.deptno,s.jobid
-FROM student s LEFT JOIN school_evaluation se on s.studentid = se.studentid  LEFT JOIN course_score cs ON s.studentid = cs.studentid  LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE  de.work_year = 0) a LEFT JOIN
-(SELECT s.studentid,de.appraisal_score FROM student s LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE   de.work_year = 1 ) b ON a.studentid = b.studentid LEFT JOIN
-(SELECT s.studentid,de.appraisal_score FROM student s LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE  de.work_year = 2 ) c ON a.studentid = c.studentid LEFT JOIN
-(SELECT s.studentid,de.appraisal_score FROM student s LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE   de.work_year = 3 ) d ON a.studentid = d.studentid
-WHERE student_name LIKE '%' #{studentName} '%'  and a.deptno = #{deptno}
+    SELECT a.studentid,student_name,a.sex,a.college,a.native_place,a.school_score,a.html,a.oracle,a.js,a.java_base,a.java_high,a.l1
+    ,a.appraisal_score score0,b.appraisal_score score1,c.appraisal_score score2,d.appraisal_score score3,a.deptno,a.jobid
+    FROM
+    (SELECT s.studentid,s.student_name,s.sex,s.college,s.native_place,se.appraisal_score school_score,cs.html,cs.oracle,cs.js,cs.java_base,cs.java_high,cs.l1,de.appraisal_score,s.deptno,s.jobid
+    FROM student s LEFT JOIN school_evaluation se on s.studentid = se.studentid  LEFT JOIN course_score cs ON s.studentid = cs.studentid  LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE  de.work_year = 0) a LEFT JOIN
+    (SELECT s.studentid,de.appraisal_score FROM student s LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE   de.work_year = 1 ) b ON a.studentid = b.studentid LEFT JOIN
+    (SELECT s.studentid,de.appraisal_score FROM student s LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE  de.work_year = 2 ) c ON a.studentid = c.studentid LEFT JOIN
+    (SELECT s.studentid,de.appraisal_score FROM student s LEFT JOIN dept_evaluation de ON de.studentid = s.studentid   WHERE   de.work_year = 3 ) d ON a.studentid = d.studentid
+    WHERE student_name LIKE '%' #{studentName} '%'  and a.deptno = #{deptno}
 
     </select>
-
+    <!--fws-->
     <!--通过学生id获取学生信息：Map<String, Object> getStudentById(int studentid);-->
     <select id="getStudentById" resultType="java.util.Map">
     SELECT s.studentid,s.student_name,s.sex,s.nation,s.birthday,s.native_place,s.marital_status,s.phone,s.id_number,

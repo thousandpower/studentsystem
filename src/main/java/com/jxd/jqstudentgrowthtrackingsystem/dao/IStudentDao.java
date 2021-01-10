@@ -46,4 +46,29 @@ public interface IStudentDao extends BaseMapper<Student> {
      */
     Map<String, Object> getStudentById(int studentid);
 
+    /**
+     * 查询全部用户
+     * @param page
+     * @param studentName
+     * @return
+     */
+    IPage<Map<String, Object>> selectAllStudent(Page<Map<String,Object>> page,
+                                             @Param("studentName") String studentName,
+                                                @Param("gradeid") String gradeid);
+
+    /**
+     * 学员培训学校评价
+     * @param studentid
+     * @return
+     */
+    Map<String,Object> selectThisStudentSchoolEvaluation(@Param("studentid") Integer studentid);
+
+    /**
+     * 学员转正及工作1-3年的评价
+     * @param studentid
+     * @param workYear
+     * @return
+     */
+    Map<String,Object> selectThisStudentDeptEvaluation(@Param("studentid") Integer studentid,
+                                                       @Param("workYear") int workYear);
 }

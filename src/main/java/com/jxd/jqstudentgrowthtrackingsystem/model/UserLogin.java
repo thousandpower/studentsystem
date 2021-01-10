@@ -3,6 +3,7 @@ package com.jxd.jqstudentgrowthtrackingsystem.model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+
 /**
  * @ClassName UserLogin
  * @Description TODO
@@ -60,5 +61,8 @@ public class UserLogin {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public UserLogin() {
     }
 }

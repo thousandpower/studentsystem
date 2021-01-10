@@ -15,6 +15,5 @@ import java.util.Map;
  * @Date: 2020/12/31 14:45
  */
 public interface IDeptDao extends BaseMapper<Dept> {
-
     IPage<Map<String,Object>> getDeptByPage(Page<Map<String,Object>> pages, @Param("deptname")String deptname);
 }

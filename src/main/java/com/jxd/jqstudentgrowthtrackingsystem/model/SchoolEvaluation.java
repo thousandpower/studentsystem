@@ -29,6 +29,9 @@ public class SchoolEvaluation {
     /*综合的评价内容*/
     private String appraisalContent;
 
+    public SchoolEvaluation() {
+    }
+
     public int getStudentid() {
         return studentid;
     }
@@ -74,9 +77,5 @@ public class SchoolEvaluation {
         this.evaluatorid = evaluatorid;
         this.gradeid = gradeid;
         this.appraisalScore = appraisalScore;
-        this.appraisalContent = appraisalContent;
-    }
-
-    public SchoolEvaluation() {
     }
 }
