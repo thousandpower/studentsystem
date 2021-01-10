@@ -25,7 +25,7 @@ public interface IStudentService extends IService<Student> {
 
     /**
      * 删除学员
-     *
+     *  lt
      * @param studentids
      * @return
      */
