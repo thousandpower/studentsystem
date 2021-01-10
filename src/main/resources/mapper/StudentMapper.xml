@@ -2,11 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IStudentDao">
+    <!--查询学员id，作为用户的id-->
     <select id="selectId" resultType="Student">
         select studentid from student
         where student_name = #{studentName}
         and id_number = #{idNumber}
     </select>
+    <!--批量删除用户，只是不显示用户信息，不删除信息-->
     <update id="deleteAnyStudents">
         update student set flag = 1
         where studentid in
@@ -14,6 +16,7 @@
             #{studentid}
         </foreach>
     </update>
+    <!--查询这名学员的培训学校评价-->
     <select id="selectThisStudentSchoolEvaluation" resultType="java.util.HashMap">
         select st.studentid,st.student_name,co.html,co.oracle,
         co.js,co.java_base,co.java_high,co.l1,te.teacherid,
@@ -24,6 +27,7 @@
         left join teacher te on te.teacherid = sc.evaluatorid
         where st.studentid = #{studentid}
     </select>
+    <!--查询这名学员的从转正到工作三年的部门评价-->
     <select id="selectThisStudentDeptEvaluation" resultType="java.util.HashMap">
         select den.appraisal_score,den.appraisal_content,de.deptname,
         jo.jobname,des.ability,des.initiative,des.communication,des.moral_quality,
@@ -36,6 +40,7 @@
         where den.studentid = #{studentid}
         and den.work_year = #{workYear}
     </select>
+    <!--查询所有学员，列表展示-->
     <select id="selectAllStudent" resultType="java.util.HashMap">
         select studentid,student_name,sex,nation,birthday,native_place,
         marital_status,phone,id_number,college,major,gradeid

@@ -2,26 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IUserLoginDao">
+    <!--用户登录-->
     <select id="selectWithLogin" resultType="UserLogin">
         select userid,username,password,role
         from userlogin
         where userid = #{userid} and password = #{password}
     </select>
+    <!--查询当前用户信息，用于修改密码-->
     <select id="selectThisUser" resultType="UserLogin">
         select userid,username,password,role
         from userlogin
         where userid = #{userid}
     </select>
+    <!--修改密码-->
     <update id="updateThisUserPwd" parameterType="UserLogin">
         update userlogin
         set password = #{password}
         where userid = #{userid}
     </update>
+    <!--重置密码-->
     <update id="resetThisUserPwd" parameterType="UserLogin">
         update userlogin
         set password = 'a123456'
         where userid = #{userid}
     </update>
+    <!--查询全部用户,用于重置密码-->
     <select id="selectAllUser" resultType="java.util.HashMap">
         select userid,username,password,role
         from userlogin
@@ -32,11 +37,13 @@
         </where>
         order by role desc
     </select>
+    <!--查询这名用户的密码-->
     <select id="getMyPassword" resultType="UserLogin">
         select userid,username,password,role
         from userlogin
         where userid = #{userid}
     </select>
+    <!--删除用户-->
     <delete id="removeUser">
         delete from userlogin
         where userid in
@@ -44,6 +51,7 @@
             #{studentid}
         </foreach>
     </delete>
+    <!--修改学员信息时,修改用户名-->
     <update id="updateUsername">
         update userlogin
         set username = #{username}
