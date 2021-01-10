@@ -17,29 +17,34 @@ import java.util.Map;
 public interface IStudentService extends IService<Student> {
     /**
      * 查询学生id
+     *
      * @param student 学员对象
      * @return
      */
     Student selectId(Student student);
+
     /**
      * 删除学员
+     *
      * @param studentids
      * @return
      */
     boolean removeAnyStudents(Integer[] studentids);
 
     /**
-     *  按部门号分页模糊查询学生
+     * 按部门号分页模糊查询学生
+     *  fws
      * @param studentname 学生姓名 （模糊查询）
-     * @param deptno 部门编号
-     * @param limit 每页条数
-     * @param page 页码
+     * @param deptno      部门编号
+     * @param limit       每页条数
+     * @param page        页码
      * @return 学生信息
      */
-    Map<String, Object> getStudentByPageAndDeptno(String studentname, int deptno,int limit, int page);
+    Map<String, Object> getStudentByPageAndDeptno(String studentname, int deptno, int limit, int page);
 
     /**
      * 通过id获取学生信息（联表获取部门名称和职务名称）
+     *  fws
      * @param studentid 学生编号
      * @return 学生信息集合
      */

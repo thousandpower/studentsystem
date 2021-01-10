@@ -19,30 +19,31 @@ import java.util.Map;
  * @Date: 2021/1/3 16:44
  */
 @Service
-public class DeptEvaluatorServiceImpl  extends ServiceImpl<IDeptEvaluatorDao, DeptEvaluator> implements IDeptEvaluatorService {
+public class DeptEvaluatorServiceImpl extends ServiceImpl<IDeptEvaluatorDao, DeptEvaluator> implements IDeptEvaluatorService {
     @Autowired
     private IDeptEvaluatorDao deptEvaluatorDao;
 
     /**
      * 分页模糊查询项目评价人信息
+     *  fws
      * @param deptEvaluatorName 模糊查询姓名
-     * @param limit 每页显示数量
-     * @param page  页码
+     * @param limit             每页显示数量
+     * @param page              页码
      * @return 分页查询项目评价人的信息
      */
     @Override
-    public Map<String, Object>  getDeptEvaluatorsByPage(String deptEvaluatorName, int limit, int page) {
+    public Map<String, Object> getDeptEvaluatorsByPage(String deptEvaluatorName, int limit, int page) {
         //构造分页对象
         Page<Map<String, Object>> pages = new Page<>(page, limit);
         Map<String, Object> map = new HashMap<>();
         //调用dao层获取数据
-        IPage<Map<String, Object>> result =deptEvaluatorDao.getDeptEvaluatorsByPage(pages, deptEvaluatorName);
+        IPage<Map<String, Object>> result = deptEvaluatorDao.getDeptEvaluatorsByPage(pages, deptEvaluatorName);
         //查询出的员工信息 （分页）
-        map.put("deptEvaluators",result.getRecords());
+        map.put("deptEvaluators", result.getRecords());
         //总条数
-        map.put("total",result.getTotal());
+        map.put("total", result.getTotal());
         //总页数
-        map.put("pageCount",result.getPages());
+        map.put("pageCount", result.getPages());
 
         return map;
     }

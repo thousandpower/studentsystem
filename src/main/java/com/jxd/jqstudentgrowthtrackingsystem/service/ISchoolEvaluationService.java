@@ -15,8 +15,9 @@ import java.util.Map;
 public interface ISchoolEvaluationService extends IService<SchoolEvaluation> {
     /**
      * 获取学生的学校评价信息
+     *  fws
      * @param studentno 学生编号
      * @return 学校评价信息集合
      */
-    Map<String,Object> getSchoolEvaluationInfo(int studentno);
+    Map<String, Object> getSchoolEvaluationInfo(int studentno);
 }

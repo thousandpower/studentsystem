@@ -12,7 +12,14 @@ import java.util.Map;
  * @Date: 2020/12/31 14:47
  */
 public interface IDeptService extends IService<Dept> {
-
+    /**
+     * 模糊分页查询部门信息
+     *  fws
+     * @param deptname
+     * @param limit
+     * @param page
+     * @return
+     */
     Map<String,Object> getDeptByPage(String deptname,int limit,int page);
 
 }

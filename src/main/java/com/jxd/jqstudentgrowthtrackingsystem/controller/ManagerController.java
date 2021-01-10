@@ -42,7 +42,7 @@ public class ManagerController {
 
     /**
      * 获取职务信息 用于放在下拉框中
-     *
+     *  fws
      * @return 职务信息集合
      */
     @GetMapping("/getJobs")
@@ -55,7 +55,7 @@ public class ManagerController {
 
     /**
      * 获取部门信息 用于放在下拉框中
-     *
+     *  fws
      * @return 部门信息集合
      */
     @GetMapping("/getDepts")
@@ -65,7 +65,7 @@ public class ManagerController {
 
     /**
      * 管理员部分的部门维护的 分页模糊查询的部门展示
-     *
+     *  fws
      * @param listQuery 查询条件
      * @return 分页模糊查询所需数据
      */
@@ -82,6 +82,7 @@ public class ManagerController {
 
     /**
      * 新增或编辑部门评价人
+     *  fws
      * @param deptEvaluator 部门评价人
      * @return 是否成功的标志
      */
@@ -122,8 +123,10 @@ public class ManagerController {
         DeptEvaluator deptEvaluator = deptEvaluatorService.getById(evaluatorid);
         return deptEvaluator;
     }
+
     /**
      * 根据部门评价人id 单个删除部门评价人
+     * fws
      *
      * @param evaluatorid 部门评价人id
      * @return 删除是否成功的字符串标志
@@ -134,17 +137,17 @@ public class ManagerController {
         DeptEvaluator deptEvaluator = deptEvaluatorService.getById(evaluatoridSub);
         AbstractWrapper wrapper = new QueryWrapper();
         wrapper.eq("deptno", deptEvaluator.getDeptno());
-        wrapper.eq("flag",0);
+        wrapper.eq("flag", 0);
         UpdateWrapper updateWrapper = new UpdateWrapper();
-        updateWrapper.eq("evaluatorid",evaluatoridSub);
-        updateWrapper.set("flag",1);
+        updateWrapper.eq("evaluatorid", evaluatoridSub);
+        updateWrapper.set("flag", 1);
         int evaluatorCountInDeptnos = deptEvaluatorService.count(wrapper);
         boolean isDel = false;
         boolean isUpdFlag = false;
         if (evaluatorCountInDeptnos > 1) {
             isUpdFlag = deptEvaluatorService.update(updateWrapper);
             //更新离职状态后，删除登录表中的对应信息，无法登录
-            if (isUpdFlag){
+            if (isUpdFlag) {
                 isDel = userLoginService.removeById(evaluatoridSub);
             }
 
@@ -157,12 +160,11 @@ public class ManagerController {
     }
 
 
-
     /*****************************部门维护******************************/
 
     /**
      * 管理员部分的部门维护的 分页模糊查询的部门展示
-     *
+     *  fws
      * @param listQuery 查询条件
      * @return 分页模糊查询所需数据
      */
@@ -178,7 +180,7 @@ public class ManagerController {
 
     /**
      * 新增或编辑后的更新部门数据
-     *
+     *  fws
      * @param dept 用于保存的部门数据
      * @return 成功或失败的字符串
      */
@@ -194,7 +196,7 @@ public class ManagerController {
 
     /**
      * 通过部门id获取部门信息，用于编辑时对表单的初始化赋值
-     *
+     *  fws
      * @param deptno 部门id
      * @return 查询出来的部门信息
      */
@@ -206,7 +208,7 @@ public class ManagerController {
 
     /**
      * 根据部门id 单个删除部门
-     *
+     *  fws
      * @param deptno 部门id
      * @return 删除是否成功的字符串标志
      */
@@ -222,7 +224,6 @@ public class ManagerController {
         if (count == 0) {
             isDel = deptService.removeById(deptid);
         }
-
         if (isDel) {
             return "success";
         } else {
@@ -233,7 +234,7 @@ public class ManagerController {
 
     /**
      * 批量删除部门
-     *
+     *  fws
      * @param arrDeptnos 需要批量删除的部门id
      * @return 是否成功的字符串标记
      */

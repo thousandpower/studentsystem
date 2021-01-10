@@ -39,7 +39,7 @@ public class DeptController {
 
     /**
      * 用于总表中的学生信息展示
-     *
+     *  fws
      * @param listQuery 分页信息，部门编号，模糊查询学生信息
      * @return 总表所需 学生信息
      */
@@ -60,7 +60,7 @@ public class DeptController {
 
     /**
      * 根据学生id 获取评分所需的所有内容
-     *
+     *  fws
      * @param studentid 学生id
      * @return 学生的基础信息 以及 学校评价，转正评价，一二三年评价
      */
@@ -82,8 +82,8 @@ public class DeptController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
-             date =simpleDateFormat.parse((String) studentService.getStudentById(studentno).get("hiredate"));
-        }catch (ParseException e){
+            date = simpleDateFormat.parse((String) studentService.getStudentById(studentno).get("hiredate"));
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -97,20 +97,21 @@ public class DeptController {
         long currentTimeL = currentTime.getTimeInMillis();
         long hiredateL = hiredate.getTimeInMillis();
         //乘法溢出int上限，要么转long 要么拆除个数来
-        long month = (currentTimeL - hiredateL) / (1000 * 60 * 60 * 24 )/30;
-        map.put("workMonth",month);
+        long month = (currentTimeL - hiredateL) / (1000 * 60 * 60 * 24) / 30;
+        map.put("workMonth", month);
         return map;
     }
 
     /**
      * 添加或更新评价信息
+     *  fws
      * @param map 评价的表单信息
      * @return 成功或失败的标识
      */
     @PostMapping("/addOrUpdDeptEvaluation")
-    public String addOrUpdDeptEvaluation(@RequestBody Map<String,String> map){
+    public String addOrUpdDeptEvaluation(@RequestBody Map<String, String> map) {
 
-        int studentid =Integer.parseInt(map.get("studentid"));
+        int studentid = Integer.parseInt(map.get("studentid"));
         int evaluatorid = Integer.parseInt(map.get("evaluatorid"));
         int appraisalScore = Integer.parseInt(map.get("appraisal_score"));
         String appraisalContent = map.get("appraisal_content");
@@ -118,7 +119,7 @@ public class DeptController {
         int deptno = Integer.parseInt(map.get("deptno"));
         int jobid = Integer.parseInt(map.get("jobid"));
 
-        DeptEvaluation deptEvaluation = new DeptEvaluation(studentid,evaluatorid,appraisalScore,appraisalContent,workYear,deptno,jobid);
+        DeptEvaluation deptEvaluation = new DeptEvaluation(studentid, evaluatorid, appraisalScore, appraisalContent, workYear, deptno, jobid);
         boolean isAddOrUpd = deptEvaluationService.save(deptEvaluation);
 
         int ability = Integer.parseInt(map.get("ability"));
@@ -127,24 +128,18 @@ public class DeptController {
         int moralQuality = Integer.parseInt(map.get("moral_quality"));
         int characters = Integer.parseInt(map.get("characters"));
 
-        DeptEvaluationItems deptEvaluationItems =  new DeptEvaluationItems(studentid,ability,initiative,communication,moralQuality,characters,workYear);
+        DeptEvaluationItems deptEvaluationItems = new DeptEvaluationItems(studentid, ability, initiative, communication, moralQuality, characters, workYear);
         boolean isAddOrUpdItems = deptEvaluationItemService.save(deptEvaluationItems);
-        if (isAddOrUpd && isAddOrUpdItems){
+        if (isAddOrUpd && isAddOrUpdItems) {
             return "success";
-        }else {
+        } else {
             QueryWrapper wrapper = new QueryWrapper();
-            wrapper.eq("studentid",studentid);
-            wrapper.eq("work_year",workYear);
+            wrapper.eq("studentid", studentid);
+            wrapper.eq("work_year", workYear);
             deptEvaluationService.remove(wrapper);
             deptEvaluationItemService.remove(wrapper);
             return "fail";
         }
-
-
-
-
-
-
     }
 
 }

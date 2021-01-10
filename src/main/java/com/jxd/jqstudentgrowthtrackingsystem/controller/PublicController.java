@@ -33,17 +33,18 @@ public class PublicController {
 
     /**
      * 获取各个身份对应的导航栏菜单
-     *
+     *  fws
      * @return map集合 封装的前台所需的各种数据
      */
     @RequestMapping("/getAllMenu")
     public Map<String, Object> getAllMenu(@RequestBody String role) {
-        String authority = role.substring(0,role.length()-1);
+        String authority = role.substring(0, role.length() - 1);
         Map<String, Object> map = new HashMap<>();
         //条件查询
         AbstractWrapper wrapper = new QueryWrapper();
         wrapper.eq("authority", authority);
         wrapper.or();
+        //公共权限
         wrapper.eq("authority", 4);
         map.put("data", menuService.list(wrapper));
         map.put("status", 200);
@@ -52,6 +53,7 @@ public class PublicController {
 
     /**
      * 用户登录的验证
+     * lt
      *
      * @param userLogin 接收的是用户对象
      * @return
@@ -71,27 +73,29 @@ public class PublicController {
 
     /**
      * 查询用户信息
+     *  lt
      * @param id 用户id
      * @return
      */
     @RequestMapping("/getThisUser")
-    public Map<String, Object> getThisUser(Integer id){
+    public Map<String, Object> getThisUser(Integer id) {
         UserLogin userLogin = userLoginService.getById(id);
         Map<String, Object> map = new HashMap<>();
-        map.put("data",userLogin);
+        map.put("data", userLogin);
         map.put("status", 200);
         return map;
     }
 
     /**
      * 修改或重置密码
+     *  lt
      * @param userLogin 用户对象
      * @return
      */
     @RequestMapping("/editPwd")
     public String editPwd(@RequestBody UserLogin userLogin) {
         //对前端传递过来的数据中是否含有密码进行判断
-        if (userLogin.getPassword().length() == 0){
+        if (userLogin.getPassword().length() == 0) {
             userLogin.setPassword("a123456");
         }
         boolean flag = userLoginService.updateById(userLogin);
@@ -104,6 +108,7 @@ public class PublicController {
 
     /**
      * 头像上传
+     *  lt
      * @param file 头像文件
      * @return
      */
@@ -117,13 +122,13 @@ public class PublicController {
         String new_fileName = uuid + "_" + fileName;
         //将文件存到服务器上
         String path = UploadPhotoConfig.getPath();
-        File file_final = new File(path,new_fileName);
+        File file_final = new File(path, new_fileName);
         //判断文件所在文件夹是否存在
-        if (!file_final.getParentFile().exists()){
+        if (!file_final.getParentFile().exists()) {
             file_final.getParentFile().mkdir();
         }
         file.transferTo(file_final);
-        String photoPath = path+"\\"+new_fileName;
+        String photoPath = path + "\\" + new_fileName;
         return photoPath;
     }
 }

@@ -23,7 +23,14 @@ public class DeptServiceImpl extends ServiceImpl<IDeptDao, Dept> implements IDep
     @Autowired
     private IDeptDao deptDao;
 
-
+    /**
+     * 模糊分页查询部门信息
+     *  fws
+     * @param deptname
+     * @param limit
+     * @param page
+     * @return
+     */
     @Override
     public Map<String, Object> getDeptByPage(String deptname, int limit, int page) {
         //构造分页对象
@@ -31,16 +38,14 @@ public class DeptServiceImpl extends ServiceImpl<IDeptDao, Dept> implements IDep
         Map<String, Object> map = new HashMap<>();
         //调用dao层获取数据
         IPage<Map<String, Object>> result = deptDao.getDeptByPage(pages, deptname);
-        //查询出的员工信息 （分页）
-        map.put("depts",result.getRecords());
+        //查询出的部门信息 （分页）
+        map.put("depts", result.getRecords());
         //总条数
-        map.put("total",result.getTotal());
+        map.put("total", result.getTotal());
         //总页数
-        map.put("pageCount",result.getPages());
-
+        map.put("pageCount", result.getPages());
         return map;
     }
-
 
 
 }
