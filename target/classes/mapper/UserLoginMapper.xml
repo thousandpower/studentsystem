@@ -31,11 +31,10 @@
     <select id="selectAllUser" resultType="java.util.HashMap">
         select userid,username,password,role
         from userlogin
-        <where>
-            <if test="username != null and username !=''">
-                username like concat('%',#{username},'%')
-            </if>
-        </where>
+        where role != 0
+        <if test="username != null and username !=''">
+            and username like concat('%',#{username},'%')
+        </if>
         order by role desc
     </select>
     <!--查询这名用户的密码-->

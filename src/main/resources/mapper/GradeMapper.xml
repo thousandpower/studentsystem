@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IGradeDao">
+    <select id="selectAllGrade" resultType="com.jxd.jqstudentgrowthtrackingsystem.model.Grade">
+        select gradeid from grade where gradeid not in (select gradeid from school_evaluation
+        GROUP BY gradeid having sum(appraisal_score) > 0)
+    </select>
+</mapper>
