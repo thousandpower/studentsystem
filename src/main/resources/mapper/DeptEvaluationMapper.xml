@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IDeptEvaluationDao">
+	<!--fws-->
     <!--按年份获取Map<String,Object> getDeptEvaluationInfoByYear
     (@Param("studentno") int studentno,@Param("workYear") int workYear);-->
     <select id="getDeptEvaluationInfoByYear" resultType="java.util.Map">
 		SELECT s.studentid,den.deptno,den.jobid,d.deptname,j.jobname,den.evaluatorid,deor.username,dei.ability,dei.initiative,dei.communication,
-		dei.moral_quality,dei.characters,dei.work_year,den.appraisal_score,den.appraisal_content,date_format(s.hiredate,'%Y-%m-%d') hiredate
+		dei.moral_quality,dei.characters,dei.work_year,den.appraisal_score,den.appraisal_content,date_format(s.hiredate,'%Y-%m-%d') hiredate,date_format(den.savetime,'%Y-%m-%d') savetime
 		FROM dept_evaluation den LEFT JOIN student s on den.studentid = s.studentid
 		LEFT JOIN job j on den.jobid = j.jobid
 		LEFT JOIN dept d on den.deptno = d.deptno
@@ -14,5 +15,13 @@
 		LEFT JOIN dept_evaluator deor ON deor.evaluatorid = den.evaluatorid
 		WHERE den.studentid = #{studentno} and dei.work_year = #{workYear}
     </select>
+
+	<!--fws-->
+	<!--更新部门评价 ：boolean updateDeptEvaluation(DeptEvaluation deptEvaluation);-->
+	<update id="updateDeptEvaluation" parameterType="com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluation">
+update dept_evaluation set appraisal_score = #{appraisalScore} , appraisal_content = #{appraisalContent} WHERE studentid = #{studentid} and work_year = #{workYear}
+	</update>
+
+
 
 </mapper>

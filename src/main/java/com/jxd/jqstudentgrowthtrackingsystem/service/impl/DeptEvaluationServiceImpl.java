@@ -21,8 +21,24 @@ public class DeptEvaluationServiceImpl extends ServiceImpl<IDeptEvaluationDao, D
  @Autowired
     private IDeptEvaluationDao deptEvaluationDao;
 
+    /**
+     * 按工作年限获取
+     * @param studentno
+     * @param workYear
+     * @return
+     */
     @Override
     public Map<String, Object> getDeptEvaluationInfoByYear(int studentno, int workYear) {
         return deptEvaluationDao.getDeptEvaluationInfoByYear(studentno,workYear);
+    }
+
+    /**
+     * 更新部门评价
+     * @param deptEvaluation 部门
+     * @return 是否成功
+     */
+    @Override
+    public boolean updateDeptEvaluation(DeptEvaluation deptEvaluation) {
+        return deptEvaluationDao.updateDeptEvaluation(deptEvaluation);
     }
 }

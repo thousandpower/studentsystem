@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IDeptEvaluationItemsDao">
+    <!--fws-->
+    <!--更新部门分项评价boolean updateDeptEvaluationItem(DeptEvaluationItems deptEvaluationItems);-->
+    <update id="updateDeptEvaluationItem" parameterType="com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluationItems">
+
+        update dept_evaluation_items set ability = #{ability}, initiative = #{initiative},communication = #{communication},moral_quality = #{moralQuality}, characters = #{characters}
+        WHERE studentid = #{studentid} and work_year = #{workYear}
+
+    </update>
+
+</mapper>

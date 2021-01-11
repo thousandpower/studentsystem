@@ -15,5 +15,11 @@ public interface IDeptEvaluationService extends IService<DeptEvaluation> {
      */
     Map<String, Object>  getDeptEvaluationInfoByYear(int studentno, int workYear);
 
+    /**
+     * 更新部门评价
+     * @param deptEvaluation 部门
+     * @return 是否成功
+     */
+    boolean updateDeptEvaluation(DeptEvaluation deptEvaluation);
 
 }

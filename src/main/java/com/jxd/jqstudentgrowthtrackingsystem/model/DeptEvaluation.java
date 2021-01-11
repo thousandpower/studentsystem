@@ -28,16 +28,18 @@ public class DeptEvaluation {
     @TableField("appraisal_content")
     private String appraisalContent;
     /*工作年份*/
-    @TableId("work_year")
+    @TableField("work_year")
     private int workYear;
     /*部门编号*/
     private int deptno;
     /*职务编号*/
     private int jobid;
+    /*保存时间，非编辑*/
+    private String savetime;
+
 
     public DeptEvaluation(int studentid, int evaluatorid, int appraisalScore, String appraisalContent, int workYear, int deptno, int jobid) {
         this.studentid = studentid;
-
         this.evaluatorid = evaluatorid;
         this.appraisalScore = appraisalScore;
         this.appraisalContent = appraisalContent;
@@ -45,6 +47,18 @@ public class DeptEvaluation {
         this.deptno = deptno;
         this.jobid = jobid;
     }
+
+    public DeptEvaluation(int studentid, int evaluatorid, int appraisalScore, String appraisalContent, int workYear, int deptno, int jobid, String savetime) {
+        this.studentid = studentid;
+        this.evaluatorid = evaluatorid;
+        this.appraisalScore = appraisalScore;
+        this.appraisalContent = appraisalContent;
+        this.workYear = workYear;
+        this.deptno = deptno;
+        this.jobid = jobid;
+        this.savetime = savetime;
+    }
+
 
     public DeptEvaluation() {
     }
@@ -103,6 +117,14 @@ public class DeptEvaluation {
 
     public void setJobid(int jobid) {
         this.jobid = jobid;
+    }
+
+    public String getSavetime() {
+        return savetime;
+    }
+
+    public void setSavetime(String savetime) {
+        this.savetime = savetime;
     }
 }
 

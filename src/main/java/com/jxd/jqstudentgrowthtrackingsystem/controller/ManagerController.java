@@ -133,7 +133,7 @@ public class ManagerController {
      * 获取全部未结课的班期
      * lt
      *
-     * @return  全部
+     * @return 全部
      */
     @RequestMapping("/getNoEndGrade")
     public Map<String, Object> getNoEndGrade() {
@@ -147,8 +147,14 @@ public class ManagerController {
         map.put("data", gradeid);
         return map;
     }
+
+    /**
+     * 获取全部的班期
+     *  lt
+     * @return 班期集合
+     */
     @RequestMapping("/getAllGrade")
-    public Map<String, Object> getAllGrade(){
+    public Map<String, Object> getAllGrade() {
         Map<String, Object> map = new HashMap<>();
         QueryWrapper<Grade> queryWrapper = new QueryWrapper<>();
         List<Grade> gradeList = gradeService.list(queryWrapper.orderByDesc("gradeid"));
@@ -159,9 +165,11 @@ public class ManagerController {
         map.put("data", gradeid);
         return map;
     }
+
     /**
      * 获取学生职务
-     *  lt
+     * lt
+     *
      * @return 学生职务集合
      */
     @RequestMapping("/getStudentJob")
@@ -173,15 +181,12 @@ public class ManagerController {
     }
 
 
-
     /********************************项目评价人*****************************/
-
-
-
 
     /**
      * 获取职务信息 用于放在下拉框中
-     *  fws
+     * fws
+     *
      * @return 职务信息集合
      */
     @GetMapping("/getJobs")
@@ -194,7 +199,8 @@ public class ManagerController {
 
     /**
      * 获取部门信息 用于放在下拉框中
-     *  fws
+     * fws
+     *
      * @return 部门信息集合
      */
     @GetMapping("/getDepts")
@@ -204,7 +210,8 @@ public class ManagerController {
 
     /**
      * 管理员部分的部门维护的 分页模糊查询的部门展示
-     *  fws
+     * fws
+     *
      * @param listQuery 查询条件
      * @return 分页模糊查询所需数据
      */
@@ -221,7 +228,8 @@ public class ManagerController {
 
     /**
      * 新增或编辑部门评价人
-     *  fws
+     * fws
+     *
      * @param deptEvaluator 部门评价人
      * @return 是否成功的标志
      */
@@ -259,9 +267,10 @@ public class ManagerController {
 
     /**
      * 获取部门评价人
-     *  fws
+     * fws
+     *
      * @param evaluatorid 评价人id
-     * @return  部门评价人
+     * @return 部门评价人
      */
     @GetMapping("/getDeptEvaluatorById/{evaluatorid}")
     public DeptEvaluator getDeptEvaluatorById(@PathVariable int evaluatorid) {
@@ -309,13 +318,14 @@ public class ManagerController {
 
     /**
      * 管理员部分的部门维护的 分页模糊查询的部门展示
-     *  fws
+     * fws
+     *
      * @param listQuery 查询条件
      * @return 分页模糊查询所需数据
      */
-    @PostMapping("/getDepts")
+    @PostMapping("/getDeptsInfo")
     public Map<String, Object> getDepts(@RequestBody Map<String, String> listQuery) {
-        int limit = Integer.valueOf(listQuery.get("limit")) == null ? 9 : Integer.valueOf(listQuery.get("limit"));
+        int limit = Integer.valueOf(listQuery.get("limit")) == null ? 10 : Integer.valueOf(listQuery.get("limit"));
         int page = Integer.valueOf(listQuery.get("page")) == null ? 1 : Integer.valueOf(listQuery.get("page"));
         String deptname = listQuery.get("filter") == null ? "" : listQuery.get("filter");
         Map<String, Object> map = new HashMap<>();
@@ -325,7 +335,8 @@ public class ManagerController {
 
     /**
      * 新增或编辑后的更新部门数据
-     *  fws
+     * fws
+     *
      * @param dept 用于保存的部门数据
      * @return 成功或失败的字符串
      */
@@ -341,7 +352,8 @@ public class ManagerController {
 
     /**
      * 通过部门id获取部门信息，用于编辑时对表单的初始化赋值
-     *  fws
+     * fws
+     *
      * @param deptno 部门id
      * @return 查询出来的部门信息
      */
@@ -353,7 +365,8 @@ public class ManagerController {
 
     /**
      * 根据部门id 单个删除部门
-     *  fws
+     * fws
+     *
      * @param deptno 部门id
      * @return 删除是否成功的字符串标志
      */
@@ -379,7 +392,8 @@ public class ManagerController {
 
     /**
      * 批量删除部门
-     *  fws
+     * fws
+     *
      * @param arrDeptnos 需要批量删除的部门id
      * @return 是否成功的字符串标记
      */
@@ -389,8 +403,8 @@ public class ManagerController {
 
         AbstractWrapper wrapper = new QueryWrapper();
         wrapper.in("deptno", deptnos);
-        int studentCountInDeptnos = studentService.count(wrapper);
 
+        int studentCountInDeptnos = studentService.count(wrapper);
         int evaluatorCountInDeptnos = deptEvaluatorService.count(wrapper);
         int count = studentCountInDeptnos + evaluatorCountInDeptnos;
         boolean isDel = false;
@@ -403,4 +417,19 @@ public class ManagerController {
             return "fail";
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

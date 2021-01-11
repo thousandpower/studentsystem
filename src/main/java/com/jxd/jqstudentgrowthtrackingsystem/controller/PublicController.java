@@ -30,7 +30,8 @@ public class PublicController {
 
     /**
      * 获取各个身份对应的导航栏菜单
-     *  fws
+     * fws
+     *
      * @return map集合 封装的前台所需的各种数据
      */
     @RequestMapping("/getAllMenu")
@@ -61,8 +62,25 @@ public class PublicController {
     public Map<String, Object> login(@RequestBody UserLogin userLogin) {
         userLogin = userLoginService.selectWithLogin(userLogin.getUserid(), userLogin.getPassword());
         Map<String, Object> map = new HashMap<>();
+        String roleName = "";
         if (userLogin != null) {
             map.put("data", userLogin);
+
+            switch (userLogin.getRole()) {
+                case 0:
+                    roleName = "管理员";
+                    break;
+                case 1:
+                    roleName = "教师";
+                    break;
+                case 2:
+                    roleName = "项目部评价人";
+                    break;
+                case 3:
+                    roleName = "学员";
+                    break;
+            }
+            map.put("roleName", roleName);
             map.put("status", "200");
         } else {
             map.put("status", "500");
@@ -72,7 +90,8 @@ public class PublicController {
 
     /**
      * 查询用户信息
-     *  lt
+     * lt
+     *
      * @param id 用户id
      * @return
      */
@@ -80,14 +99,15 @@ public class PublicController {
     public Map<String, Object> getThisUser(@PathVariable Integer id) {
         UserLogin userLogin = userLoginService.selectThisUser(id);
         Map<String, Object> map = new HashMap<>();
-        map.put("data",userLogin);
+        map.put("data", userLogin);
         map.put("status", 200);
         return map;
     }
 
     /**
      * 修改密码
-     *  lt
+     * lt
+     *
      * @param userLogin 用户对象
      * @return
      */
@@ -104,8 +124,9 @@ public class PublicController {
 
     /**
      * 重置密码
+     *
      * @param userid 用户编号
-     * @return  是否成功的标志
+     * @return 是否成功的标志
      */
     @RequestMapping("/resetMyPwd/{userid}")
     public String resetPwd(@PathVariable Integer userid) {
@@ -119,7 +140,8 @@ public class PublicController {
 
     /**
      * 查询用户的密码
-     *  lt
+     * lt
+     *
      * @param userid
      * @return
      */
@@ -132,6 +154,7 @@ public class PublicController {
 
     /**
      * 上传
+     *
      * @param multipartFile
      * @return
      * @throws Exception
