@@ -67,7 +67,7 @@ public class SchoolController {
     @GetMapping("/getTeachers")
     public List<Teacher> getTeachers(){
         AbstractWrapper wrapper = new QueryWrapper();
-        wrapper.eq("flag",1) ; //flag为1时表示教师在职
+        wrapper.eq("flag",0) ; //flag为0时表示教师在职
         return teacherService.list(wrapper);
     }
 

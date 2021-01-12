@@ -68,7 +68,7 @@ public class TeacherController {
     */
     @PostMapping("/addOrUpdTeacher")
     public String addOrUpdTeacher(@RequestBody Teacher teacher){
-        teacher.setFlag(1);
+        teacher.setFlag(0);
         if(teacher.getTeacherid()==0){ //判断为新增时，同时也向登录表插入新增的数据，使新增教师可以登录
             teacherService.save(teacher);
             UserLogin userLogin = new UserLogin(teacher.getTeacherid(),teacher.getUsername(),"a123456",1);

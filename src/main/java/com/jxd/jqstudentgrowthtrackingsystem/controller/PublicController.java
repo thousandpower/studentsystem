@@ -54,7 +54,7 @@ public class PublicController {
     /**
      * 用户登录的验证
      * lt
-     *
+     * fws
      * @param userLogin 接收的是用户对象
      * @return
      */
@@ -74,7 +74,7 @@ public class PublicController {
                     roleName = "教师";
                     break;
                 case 2:
-                    roleName = "项目部评价人";
+                    roleName = "部门评价人";
                     break;
                 case 3:
                     roleName = "学员";
