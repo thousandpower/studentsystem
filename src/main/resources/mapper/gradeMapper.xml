@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.IGradeDao">
+    <select id="getGradeByPage" resultType="java.util.Map">
+        select g.gradeid,g.teacherid,g.date,t.username from grade g left join teacher t on g.teacherid=t.teacherid
+        order by g.gradeid desc
+    </select>
+
+    <select id="selectGrade" resultType="java.util.Map">
+         select g.gradeid,g.teacherid,g.date,t.username from grade g left join teacher t on g.teacherid=t.teacherid
+         where g.gradeid = #{gradeid} order by g.gradeid desc
+    </select>
+
+    <select id="getGradeByTId" resultType="com.jxd.jqstudentgrowthtrackingsystem.model.Grade">
+        select gradeid from grade where teacherid = #{tId}
+    </select>
+</mapper>
+    

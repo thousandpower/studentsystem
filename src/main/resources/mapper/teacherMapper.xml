@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxd.jqstudentgrowthtrackingsystem.dao.ITeacherDao">
+    <select id="getTeacherByPage" resultType="java.util.Map">
+        select teacherid,username,sex,age,phone from teacher where username like '%' #{username} '%' and flag=1 order by teacherid desc
+    </select>
+
+    <update id="delTeacherByBatch" >
+        update teacher set flag = 0 where teacherid in
+        <foreach collection="array" open="(" close=")" separator="," item="teacherid" >
+            #{teacherid}
+        </foreach>
+    </update>
+
+    <update id="delTeacherById">
+        update teacher set flag = 0 where teacherid = #{teacherid}
+    </update>
+
+    <select id="getStudentByPage" resultType="java.util.Map">
+        select s.studentid,s.student_name,s.sex,cs.html,cs.oracle,cs.js,
+        cs.java_base,cs.java_high,cs.l1,se.appraisal_score from student s left join course_score cs on s.studentid=cs.studentid
+        left join school_evaluation se on s.studentid=se.studentid where s.gradeid = #{gradeid} and s.student_name like '%' #{username} '%'
+        and s.flag = 1
+    </select>
+
+    <select id="getEvaluationBysId" resultType="java.util.Map">
+        select se.studentid,se.evaluatorid,t.username,se.gradeid,se.appraisal_score,se.appraisal_content,cs.html,cs.oracle,
+        cs.js,cs.java_base,cs.java_high,cs.l1 from school_evaluation se inner join course_score cs on se.studentid = cs.studentid inner join
+        teacher t on t.teacherid = se.evaluatorid
+        where se.studentid = #{sId}
+    </select>
+
+    <select id="getAssignList" resultType="java.util.Map">
+        select s.studentid,s.student_name as studentname,s.sex,s.nation,se.appraisal_score,s.gradeid,d.deptname from student s
+        left join school_evaluation se on s.studentid = se.studentid left join dept d on s.deptno = d.deptno
+        where s.gradeid = #{gradeid} and s.student_name like '%' #{username} '%' and s.flag =1 and
+        se.appraisal_score >= 3
+    </select>
+
+    <update id="assignStudent">
+        update student set hiredate = #{hiredate},deptno = #{deptno},jobid = #{jobid} where studentid = #{studentid}
+    </update>
+</mapper>
+    

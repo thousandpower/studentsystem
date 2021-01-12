@@ -17,10 +17,10 @@ public class Evaluator {
     /*评价人姓名*/
     private String username;
 
-    /*价人部门编号*/
+    /*评价人部门编号*/
     private int deptno;
 
-    /*价人部门编号*/
+    /*评价人部门编号*/
     private int age;
 
     /*姓名*/

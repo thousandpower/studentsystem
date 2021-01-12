@@ -1,7 +1,10 @@
 package com.jxd.jqstudentgrowthtrackingsystem.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.util.Date;
 
 /**
  * @Author: lrc
@@ -16,6 +19,10 @@ public class Grade {
 
     /*教师编号，指定一位负责本期的教师*/
     private int teacherid;
+
+    /*开班日期*/
+    @TableField("date")
+    private String startDate;
 
     public Grade(int gradeid, int teacherid) {
         this.gradeid = gradeid;
@@ -39,5 +46,13 @@ public class Grade {
 
     public void setTeacherid(int teacherid) {
         this.teacherid = teacherid;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }
