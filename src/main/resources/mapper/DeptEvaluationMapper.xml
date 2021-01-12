@@ -19,7 +19,7 @@
 	<!--fws-->
 	<!--更新部门评价 ：boolean updateDeptEvaluation(DeptEvaluation deptEvaluation);-->
 	<update id="updateDeptEvaluation" parameterType="com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluation">
-update dept_evaluation set appraisal_score = #{appraisalScore} , appraisal_content = #{appraisalContent} WHERE studentid = #{studentid} and work_year = #{workYear}
+		update dept_evaluation set appraisal_score = #{appraisalScore} , appraisal_content = #{appraisalContent} WHERE studentid = #{studentid} and work_year = #{workYear}
 	</update>
 
 

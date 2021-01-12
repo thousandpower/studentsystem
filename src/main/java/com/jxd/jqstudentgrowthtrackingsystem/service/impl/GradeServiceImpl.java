@@ -84,8 +84,8 @@ public class GradeServiceImpl extends ServiceImpl<IGradeDao, Grade> implements I
     */
     @Override
     public List<Grade> getGradeByTId(int tid) {
-        return gradeDao.getGradeByTId(tid);
-    @Override
+        return gradeDao.getGradeByTId(tid);}
+
     public List<Grade> selectAllGrade() {
         return gradeDao.selectAllGrade();
     }

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jxd.jqstudentgrowthtrackingsystem.dao.ICourseScoreDao;
 import com.jxd.jqstudentgrowthtrackingsystem.dao.ITeacherDao;
-import com.jxd.jqstudentgrowthtrackingsystem.model.Evaluator;
+
 import com.jxd.jqstudentgrowthtrackingsystem.model.Teacher;
 import com.jxd.jqstudentgrowthtrackingsystem.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
