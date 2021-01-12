@@ -8,6 +8,9 @@ import com.jxd.jqstudentgrowthtrackingsystem.model.Job;
  * @Author: fws
  * @Description:
  * @Date: 2021/1/4 13:54
+ * @Author: lrc
+ * @Description:
+ * @Date: 2021/1/11
  */
 public interface IJobService extends IService<Job> {
 }

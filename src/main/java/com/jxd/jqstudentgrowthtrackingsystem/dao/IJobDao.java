@@ -9,6 +9,12 @@ import com.jxd.jqstudentgrowthtrackingsystem.model.Job;
  * @Author: fws
  * @Description:
  * @Date: 2021/1/4 13:55
+import com.jxd.jqstudentgrowthtrackingsystem.model.Job;
+
+/**
+ * @Author: lrc
+ * @Description:
+ * @Date: 2021/1/11
  */
 public interface IJobDao extends BaseMapper<Job> {
 }

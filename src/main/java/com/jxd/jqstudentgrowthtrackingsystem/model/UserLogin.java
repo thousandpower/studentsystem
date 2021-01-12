@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * @ClassName UserLogin
  * @Description TODO
@@ -14,7 +17,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("userlogin")
 public class UserLogin {
     //用户id
-    @TableId("userid")
+    @TableId
     private int userid;
     //用户名
     private String username;

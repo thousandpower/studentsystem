@@ -6,7 +6,7 @@ import com.jxd.jqstudentgrowthtrackingsystem.model.Job;
 import com.jxd.jqstudentgrowthtrackingsystem.service.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Service;
 /**
  * @ClassName: JobServiceImpl
  * @Author: fws

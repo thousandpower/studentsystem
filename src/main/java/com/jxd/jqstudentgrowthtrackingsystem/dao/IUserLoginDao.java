@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import org.apache.ibatis.annotations.Param;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jxd.jqstudentgrowthtrackingsystem.model.UserLogin;
 import java.util.List;
 import java.util.Map;
 
@@ -67,4 +68,12 @@ public interface IUserLoginDao extends BaseMapper<UserLogin> {
      * @return
      */
     boolean updateUsername(@Param("username") String username,@Param("userid") Integer userid);
+/**
+ * @Author: lrc
+ * @Description:
+ * @Date: 2021/1/5
+ */
+
+
+
 }

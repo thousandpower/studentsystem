@@ -29,6 +29,15 @@ public class SchoolEvaluation {
     /*综合的评价内容*/
     private String appraisalContent;
 
+
+    public SchoolEvaluation(int studentid, int evaluatorid, int gradeid, int appraisalScore, String appraisalContent) {
+        this.studentid = studentid;
+        this.evaluatorid = evaluatorid;
+        this.gradeid = gradeid;
+        this.appraisalScore = appraisalScore;
+        this.appraisalContent = appraisalContent;
+    }
+
     public SchoolEvaluation() {
     }
 
@@ -72,10 +81,5 @@ public class SchoolEvaluation {
         this.appraisalContent = appraisalContent;
     }
 
-    public SchoolEvaluation(int studentid, int evaluatorid, int gradeid, int appraisalScore, String appraisalContent) {
-        this.studentid = studentid;
-        this.evaluatorid = evaluatorid;
-        this.gradeid = gradeid;
-        this.appraisalScore = appraisalScore;
-    }
+
 }

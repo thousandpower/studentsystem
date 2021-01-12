@@ -3,7 +3,7 @@ package com.jxd.jqstudentgrowthtrackingsystem.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jxd.jqstudentgrowthtrackingsystem.model.DeptEvaluationItems;
 import com.jxd.jqstudentgrowthtrackingsystem.model.SchoolEvaluation;
-
+import com.jxd.jqstudentgrowthtrackingsystem.model.SchoolEvaluation;
 import java.util.Map;
 
 /**
@@ -19,4 +19,12 @@ public interface ISchoolEvaluationDao  extends BaseMapper<SchoolEvaluation> {
      * @return 学校评价信息集合
      */
     Map<String, Object> getSchoolEvaluationInfo(int studentno);
+
+
+/**
+ * @Author: lrc
+ * @Description:
+ * @Date: 2021/1/11
+ */
+
 }
