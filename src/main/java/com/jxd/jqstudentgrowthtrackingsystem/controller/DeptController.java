@@ -105,7 +105,7 @@ public class DeptController {
         long saveTime3 = 0;
 
         try {
-            Date newd = simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0).get("savetime"));
+
             saveDate0 = deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0) == null ? currentDate : simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0).get("savetime"));
             saveDate1 = deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 1) == null ? currentDate : simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 1).get("savetime"));
             saveDate2 = deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 2) == null ? currentDate : simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 2).get("savetime"));
