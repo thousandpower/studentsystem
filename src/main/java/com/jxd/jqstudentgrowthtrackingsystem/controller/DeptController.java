@@ -76,7 +76,6 @@ public class DeptController {
         currentTime.setTime(currentDate);
         long currentTimeL = currentTime.getTimeInMillis();
 
-
         int studentno = Integer.valueOf(studentid.substring(0, studentid.length() - 1));
         Map<String, Object> map = new HashMap<>();
         //学生基础信息
@@ -98,14 +97,12 @@ public class DeptController {
         Date saveDate2 = null;
         Date saveDate3 = null;
 
-
         long saveTime0 = 0;
         long saveTime1 = 0;
         long saveTime2 = 0;
         long saveTime3 = 0;
 
         try {
-
             saveDate0 = deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0) == null ? currentDate : simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0).get("savetime"));
             saveDate1 = deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 1) == null ? currentDate : simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 1).get("savetime"));
             saveDate2 = deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 2) == null ? currentDate : simpleDateFormat.parse((String) deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 2).get("savetime"));
@@ -132,11 +129,9 @@ public class DeptController {
             long saveDate3L = saveDate3Cal.getTimeInMillis();
             saveTime3 = (currentTimeL - saveDate3L) / (1000 * 60 * 60 * 24);
 
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
 
         //0表示新增，1表示修改
         if (deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0) == null) {
@@ -159,7 +154,6 @@ public class DeptController {
         } else {
             save3 = "1";
         }
-
 
         //java.lang.String 转化为 java.util.Date
         Date date = null;
