@@ -18,22 +18,24 @@ import java.util.Map;
  */
 @Service
 public class DeptEvaluationServiceImpl extends ServiceImpl<IDeptEvaluationDao, DeptEvaluation> implements IDeptEvaluationService {
- @Autowired
+    @Autowired
     private IDeptEvaluationDao deptEvaluationDao;
 
     /**
      * 按工作年限获取
+     *  fws
      * @param studentno
      * @param workYear
      * @return
      */
     @Override
     public Map<String, Object> getDeptEvaluationInfoByYear(int studentno, int workYear) {
-        return deptEvaluationDao.getDeptEvaluationInfoByYear(studentno,workYear);
+        return deptEvaluationDao.getDeptEvaluationInfoByYear(studentno, workYear);
     }
 
     /**
      * 更新部门评价
+     *  fws
      * @param deptEvaluation 部门
      * @return 是否成功
      */

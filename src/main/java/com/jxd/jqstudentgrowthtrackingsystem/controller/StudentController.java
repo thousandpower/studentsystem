@@ -36,7 +36,8 @@ public class StudentController {
 
     /**
      * 查询学员的所有信息
-     *  lt
+     * lt
+     *
      * @param userid
      * @return
      */
@@ -50,7 +51,8 @@ public class StudentController {
 
     /**
      * 修改学员信息
-     *  lt
+     * lt
+     *
      * @param student
      * @return
      */
@@ -67,7 +69,8 @@ public class StudentController {
 
     /**
      * 获取培训学校评价
-     *  lt
+     * lt
+     *
      * @param userid
      * @return
      */
@@ -80,7 +83,8 @@ public class StudentController {
 
     /**
      * 获取部门评价
-     *  lt
+     * lt
+     *
      * @param userid
      * @param workYear
      * @return

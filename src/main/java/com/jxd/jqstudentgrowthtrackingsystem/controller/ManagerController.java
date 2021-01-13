@@ -150,7 +150,8 @@ public class ManagerController {
 
     /**
      * 获取全部的班期
-     *  lt
+     * lt
+     *
      * @return 班期集合
      */
     @RequestMapping("/getAllGrade")
@@ -417,19 +418,6 @@ public class ManagerController {
             return "fail";
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

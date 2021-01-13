@@ -209,17 +209,17 @@ public class DeptController {
         String save3 = map.get("save3");
 
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("studentid",studentid);
-        queryWrapper.eq("work_year",workYear);
+        queryWrapper.eq("studentid", studentid);
+        queryWrapper.eq("work_year", workYear);
 
         boolean isAddOrUpd = false;
         boolean isAddOrUpdItems = false;
         DeptEvaluation deptEvaluation = new DeptEvaluation(studentid, evaluatorid, appraisalScore, appraisalContent, workYear, deptno, jobid, curentDateStr);
         if (workYear == 0) {
             if ("0".equals(save0)) {
-                if (deptEvaluationService.getOne(queryWrapper) !=null){
+                if (deptEvaluationService.getOne(queryWrapper) != null) {
                     isAddOrUpd = deptEvaluationService.updateDeptEvaluation(deptEvaluation);
-            }else {
+                } else {
                     isAddOrUpd = deptEvaluationService.save(deptEvaluation);
                 }
             } else {
@@ -227,9 +227,9 @@ public class DeptController {
             }
         } else if (workYear == 1) {
             if ("0".equals(save1)) {
-                if (deptEvaluationService.getOne(queryWrapper) !=null){
+                if (deptEvaluationService.getOne(queryWrapper) != null) {
                     isAddOrUpd = deptEvaluationService.updateDeptEvaluation(deptEvaluation);
-                }else {
+                } else {
                     isAddOrUpd = deptEvaluationService.save(deptEvaluation);
                 }
 
@@ -238,9 +238,9 @@ public class DeptController {
             }
         } else if (workYear == 2) {
             if ("0".equals(save2)) {
-                if (deptEvaluationService.getOne(queryWrapper) !=null){
+                if (deptEvaluationService.getOne(queryWrapper) != null) {
                     isAddOrUpd = deptEvaluationService.updateDeptEvaluation(deptEvaluation);
-                }else {
+                } else {
                     isAddOrUpd = deptEvaluationService.save(deptEvaluation);
                 }
             } else {
@@ -248,9 +248,9 @@ public class DeptController {
             }
         } else if (workYear == 3) {
             if ("0".equals(save3)) {
-                if (deptEvaluationService.getOne(queryWrapper) !=null){
+                if (deptEvaluationService.getOne(queryWrapper) != null) {
                     isAddOrUpd = deptEvaluationService.updateDeptEvaluation(deptEvaluation);
-                }else {
+                } else {
                     isAddOrUpd = deptEvaluationService.save(deptEvaluation);
                 }
             } else {
@@ -269,9 +269,9 @@ public class DeptController {
 
         if (workYear == 0) {
             if ("0".equals(save0)) {
-                if (deptEvaluationItemService.getOne(queryWrapper)!=null ){
+                if (deptEvaluationItemService.getOne(queryWrapper) != null) {
                     isAddOrUpdItems = deptEvaluationItemService.updateDeptEvaluationItem(deptEvaluationItems);
-                }else {
+                } else {
                     isAddOrUpdItems = deptEvaluationItemService.save(deptEvaluationItems);
                 }
             } else {
@@ -279,9 +279,9 @@ public class DeptController {
             }
         } else if (workYear == 1) {
             if ("0".equals(save1)) {
-                if (deptEvaluationItemService.getOne(queryWrapper)!=null ){
+                if (deptEvaluationItemService.getOne(queryWrapper) != null) {
                     isAddOrUpdItems = deptEvaluationItemService.updateDeptEvaluationItem(deptEvaluationItems);
-                }else {
+                } else {
                     isAddOrUpdItems = deptEvaluationItemService.save(deptEvaluationItems);
                 }
             } else {
@@ -289,9 +289,9 @@ public class DeptController {
             }
         } else if (workYear == 2) {
             if ("0".equals(save2)) {
-                if (deptEvaluationItemService.getOne(queryWrapper)!=null ){
+                if (deptEvaluationItemService.getOne(queryWrapper) != null) {
                     isAddOrUpdItems = deptEvaluationItemService.updateDeptEvaluationItem(deptEvaluationItems);
-                }else {
+                } else {
                     isAddOrUpdItems = deptEvaluationItemService.save(deptEvaluationItems);
                 }
             } else {
@@ -299,9 +299,9 @@ public class DeptController {
             }
         } else if (workYear == 3) {
             if ("0".equals(save3)) {
-                if (deptEvaluationItemService.getOne(queryWrapper)!=null ){
+                if (deptEvaluationItemService.getOne(queryWrapper) != null) {
                     isAddOrUpdItems = deptEvaluationItemService.updateDeptEvaluationItem(deptEvaluationItems);
-                }else {
+                } else {
                     isAddOrUpdItems = deptEvaluationItemService.save(deptEvaluationItems);
                 }
             } else {
