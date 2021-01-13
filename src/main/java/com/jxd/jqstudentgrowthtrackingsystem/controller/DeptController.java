@@ -168,7 +168,7 @@ public class DeptController {
         Calendar hiredate = Calendar.getInstance();
         hiredate.setTime(date);
         long hiredateL = hiredate.getTimeInMillis();
-        //乘法溢出int上限，要么转long 要么拆除个数来
+        //乘法溢出int上限，要么转long 要么拆出一个数来
         long month = (currentTimeL - hiredateL) / (1000 * 60 * 60 * 24) / 30;
         map.put("workMonth", month);
         map.put("save0", save0);
@@ -259,7 +259,6 @@ public class DeptController {
                 isAddOrUpd = deptEvaluationService.updateDeptEvaluation(deptEvaluation);
             }
         }
-
 
         int ability = Integer.parseInt(map.get("ability"));
         int initiative = Integer.parseInt(map.get("initiative"));

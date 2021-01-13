@@ -207,7 +207,7 @@ public class TeacherController {
     @PostMapping("/assign")
     public String assign(@RequestBody Map<String, String> form) {
         int studentid = Integer.valueOf(form.get("studentid")); //获取分配的学生id
-        int jobid = Integer.valueOf(form.get("jobid")); //获取分配到的部门id
+        int jobid=1;
         int deptno = Integer.valueOf(form.get("deptno")); //获取分配的职务id
         String hiredate = form.get("hiredate");  //入职日期
 
