@@ -133,7 +133,7 @@ public class DeptController {
             e.printStackTrace();
         }
 
-        //0表示新增，1表示修改
+        //判断是否能够查询出数据。 未查询出数据则为0： 0表示新增，1表示修改
         if (deptEvaluationService.getDeptEvaluationInfoByYear(studentno, 0) == null) {
             save0 = "0";
         } else {
@@ -195,7 +195,7 @@ public class DeptController {
         Date currentDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String curentDateStr = simpleDateFormat.format(currentDate);
-
+        //接收数据，利用构造方法给对象赋值
         int studentid = Integer.parseInt(map.get("studentid"));
         int evaluatorid = Integer.parseInt(map.get("evaluatorid"));
         int appraisalScore = Integer.parseInt(map.get("appraisal_score"));
@@ -215,8 +215,10 @@ public class DeptController {
         boolean isAddOrUpd = false;
         boolean isAddOrUpdItems = false;
         DeptEvaluation deptEvaluation = new DeptEvaluation(studentid, evaluatorid, appraisalScore, appraisalContent, workYear, deptno, jobid, curentDateStr);
+
         if (workYear == 0) {
             if ("0".equals(save0)) {
+                //还没第一次新增的窗口没有关闭页面，保存时分辨是否有数据，从而走更新 还是保存方法
                 if (deptEvaluationService.getOne(queryWrapper) != null) {
                     isAddOrUpd = deptEvaluationService.updateDeptEvaluation(deptEvaluation);
                 } else {
@@ -269,6 +271,7 @@ public class DeptController {
 
         if (workYear == 0) {
             if ("0".equals(save0)) {
+                //还没第一次新增的窗口没有关闭页面，保存时分辨是否有数据，从而走更新 还是保存方法
                 if (deptEvaluationItemService.getOne(queryWrapper) != null) {
                     isAddOrUpdItems = deptEvaluationItemService.updateDeptEvaluationItem(deptEvaluationItems);
                 } else {
